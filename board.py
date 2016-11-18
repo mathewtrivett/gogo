@@ -1,3 +1,5 @@
+import Group
+
 class Board:
     def __init__(self,size):
         self.size = size
@@ -10,3 +12,6 @@ class Board:
             if coordinate > self.size or coordinate < 0:
                 offBoard = True
         return offBoard
+
+    def addGroup(self, group):
+        self.groups = self.groups + group
