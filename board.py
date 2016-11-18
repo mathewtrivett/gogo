@@ -1,4 +1,4 @@
-import Group
+import group
 
 class Board:
     def __init__(self,size):
