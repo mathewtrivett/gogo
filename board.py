@@ -1,4 +1,4 @@
-import group
+import Group
 
 class Board:
     def __init__(self,size):
@@ -14,4 +14,4 @@ class Board:
         return offBoard
 
     def addGroup(self, group):
-        self.groups = self.groups + group
+        self.groups = self.groups + [group]

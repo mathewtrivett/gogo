@@ -5,4 +5,3 @@ class Group:
 
     def mergeGroup(self, group):
         self.coordinates = self.coordinates + group.coordinates
-		
