@@ -1,5 +1,3 @@
-from Board import Board
-
 class Group:
     
     def __init__(self, colour, coordinates, groupId, isVirtual = False):
