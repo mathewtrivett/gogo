@@ -9,7 +9,7 @@ class Board:
     def offBoard(self,coordinates):
         offBoard = False
         for (coordinate) in coordinates:
-            if(coordinate > self.size-1) or (coordinate < 0):
+            if coordinate > self.size-1  or coordinate < 0:
                 offBoard = True
         return offBoard
 
@@ -40,7 +40,7 @@ class Board:
     def isSuicide(self,coordinates,colour):
         group = Group(coordinates, colour, isVirtual=True)
         for neighbour in self.neighbours(coordinates):
-            if(neighbour.getGroup(coordinates).colour == group.colour):
+            if neighbour.getGroup(coordinates).colour == group.colour:
                 group.mergeGroup(neighbour)
         return group.isCaptured(self)
     
