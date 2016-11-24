@@ -1,3 +1,5 @@
+from Board import Board
+
 class Group:
     
     def __init__(self, colour, coordinates, groupId, isVirtual = False):
@@ -11,10 +13,10 @@ class Group:
     if self is virtual then the board will remain unaffected
     '''
     def mergeGroup(self, group, board):
-        if(type(group.id) == NoneType):
+        if type(group.id) == NoneType :
             return
         self.coordinates = self.coordinates.union(group.coordinates)
-        if(not self.isVirtual):#virtual
+        if not self.isVirtual :#virtual
             board.deleteGroup(group)
 
     '''
@@ -22,7 +24,7 @@ class Group:
     '''
     def isInGroup(self, testCoord):
         for groupCoord in coordinates:
-            if(groupCoord == testCoord):
+            if groupCoord == testCoord:
                 return True
         return False
     
@@ -33,7 +35,7 @@ class Group:
     def isCaptured(self, board):
         for coord in self.coordinates:
             for neighbour in board.neighbours(coord):
-                if(self.isInGroup(neighbour)):#we must include this check so that the function can deal with virtual groups
+                if neighbour.isInGroup() :#we must include this check so that the function can deal with virtual groups
                     continue
                 elif board.getGroup(neighbour).colour == 0:#any empty square touching the group indicates it is not captured
                     return False
