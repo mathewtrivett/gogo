@@ -1,3 +1,5 @@
+from group import Group
+
 class Board:
     def __init__(self,size):
         self.size = size
