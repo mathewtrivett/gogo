@@ -1,5 +1,3 @@
-from Board import Board
-
 class Group:
     
     def __init__(self, colour, coordinates, groupId, isVirtual = False):
@@ -40,3 +38,5 @@ class Group:
                 elif board.getGroup(neighbour).colour == 0:#any empty square touching the group indicates it is not captured
                     return False
         return True
+
+from Board import Board
