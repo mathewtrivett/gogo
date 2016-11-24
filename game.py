@@ -1,5 +1,5 @@
-from Board import Board 
-from Group import Group
+from board import Board 
+from group import Group
 
 board = Board(9)
 group1 = Group('black',(0,0))
