@@ -9,6 +9,8 @@ class Group:
         self.isVirtual = isVirtual#virtual groups are not on the game board and are used for analysis
 
     def mergeGroup(self, group, board):
+        if(type(group.id) == NoneType):
+            return
         self.coordinates = self.coordinates.union(group.coordinates)
         if(not self.isVirtual):#virtual
             board.deleteGroup(group)
