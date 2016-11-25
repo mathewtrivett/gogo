@@ -1,8 +1,9 @@
 class Group:
     
     def __init__(self, colour, coordinates, groupId, isVirtual = False):
+        self.coordinates = set()
         self.colour = colour
-        self.coordinates = {coordinates}
+        self.coordinates = self.coordinates.union(coordinates)
         self.id = groupID
         self.isVirtual = isVirtual #virtual groups are not on the game board and are used for analysis
 
