@@ -1,5 +1,3 @@
-from group import Group
-
 class Board:
     def __init__(self,size):
         self.size = size
@@ -68,3 +66,5 @@ class Board:
 
     def deleteGroup(self, group):
         pass
+
+from group import Group
