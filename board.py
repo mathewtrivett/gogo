@@ -57,8 +57,8 @@ class Board:
     isPlayable returns true if, onboard is true, isEmpty and isNotSuicide. 
     '''
                     
-    def isPlayable(self, coordinates):
-        pass
+    def isPlayable(self, coordinates, colour):
+        return isEmpty(coordinates) and not isSuicide(coordinates,colour) and not offBoard(coordinates)
         
     def addGroup(self, group):
         self.groups = self.groups + [group]
