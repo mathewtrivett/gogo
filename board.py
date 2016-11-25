@@ -66,3 +66,5 @@ class Board:
 
     def deleteGroup(self, group):
         pass
+
+from group import Group
