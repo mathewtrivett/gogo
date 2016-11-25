@@ -14,7 +14,6 @@ class Board:
     def isEmpty(self, coordinates):
         return self.matrix[coordinates[0]][coordinates[1]] == 0
 
-
     '''
     Neighbours looks at coordinates N, S, E and W of a given coordinate.
     If it is not off the board it adds the coordinate to a set and returns the set.
@@ -58,8 +57,8 @@ class Board:
     isPlayable returns true if, onboard is true, isEmpty and isNotSuicide. 
     '''
                     
-    def isPlayable(self, coordinates):
-        pass
+    def isPlayable(self, coordinates, colour):
+        return isEmpty(coordinates) and not isSuicide(coordinates,colour) and not offBoard(coordinates)
         
     def addGroup(self, group):
         self.groups = self.groups + [group]
