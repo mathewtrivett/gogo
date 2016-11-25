@@ -4,7 +4,7 @@ class Group:
         self.colour = colour
         self.coordinates = {coordinates}
         self.id = groupID
-        self.isVirtual = isVirtual#virtual groups are not on the game board and are used for analysis
+        self.isVirtual = isVirtual #virtual groups are not on the game board and are used for analysis
 
     '''
     Merges group into self, then telling the board to delete the reference to group,
@@ -21,7 +21,7 @@ class Group:
     Checks is a given coordinate belongs to the group
     '''
     def isInGroup(self, testCoord):
-        for groupCoord in coordinates:
+        for groupCoord in self.coordinates:
             if groupCoord == testCoord:
                 return True
         return False
@@ -33,9 +33,9 @@ class Group:
     def isCaptured(self, board):
         for coord in self.coordinates:
             for neighbour in board.neighbours(coord):
-                if neighbour isInGroup :#we must include this check so that the function can deal with virtual groups
+                if neighbour.isInGroup(neighbour) :#we must include this check so that the function can deal with virtual groups
                     continue
-                elif board.getGroup(neighbour).colour == 0:#any empty square touching the group indicates it is not captured
+                elif board.getGroup(neighbour).colour == 0: #any empty square touching the group indicates it is not captured
                     return False
         return True
 
