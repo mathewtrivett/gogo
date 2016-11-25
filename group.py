@@ -39,4 +39,4 @@ class Group:
                     return False
         return True
 
-from Board import Board
+from board import Board

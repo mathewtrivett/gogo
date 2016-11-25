@@ -1,5 +1,3 @@
-from group import Group
-
 class Board:
     def __init__(self,size):
         self.size = size
@@ -15,7 +13,6 @@ class Board:
 
     def isEmpty(self, coordinates):
         return self.matrix[coordinates[0]][coordinates[1]] == 0
-
 
     '''
     Neighbours looks at coordinates N, S, E and W of a given coordinate.
@@ -68,3 +65,5 @@ class Board:
 
     def deleteGroup(self, group):
         pass
+
+from group import Group
