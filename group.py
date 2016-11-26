@@ -12,7 +12,7 @@ class Group:
     if self is virtual then the board will remain unaffected
     '''
     def mergeGroup(self, group, board):
-        if type(group.id) == NoneType :
+        if group.id is None :
             return
         self.coordinates = self.coordinates.union(group.coordinates)
         if not self.isVirtual :#virtual

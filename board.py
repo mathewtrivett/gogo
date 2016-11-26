@@ -1,7 +1,7 @@
 class Board:
     def __init__(self,size):
         self.size = size
-        self.matrix = [[0 for x in range(self.size)] for y in range(self.size)]
+        self.matrix = [['None' for x in range(self.size)] for y in range(self.size)]
         self.groups = []
 
     def offBoard(self,coordinates):
@@ -38,10 +38,10 @@ class Board:
     '''
 
     def isSuicide(self,coordinates,colour):
-        group = Group(coordinates, colour, isVirtual=True)
+        group = Group(colour,[coordinates],isVirtual=True)
         for neighbour in self.neighbours(coordinates):
             if self.getGroup(neighbour).colour == group.colour:
-                group.mergeGroup(neighbour)
+                group.mergeGroup(group,self)
         return group.isCaptured(self)
     
     '''
