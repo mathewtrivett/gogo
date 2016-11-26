@@ -11,6 +11,9 @@ class Board:
                 offBoard = True
         return offBoard
 
+    ## Currently this is looking in the Matrix for empty spaces, we arn't
+    ## Updating the matrix so will always return true
+
     def isEmpty(self, coordinates):
         return self.matrix[coordinates[0]][coordinates[1]] == 0
 
@@ -37,7 +40,7 @@ class Board:
     def isSuicide(self,coordinates,colour):
         group = Group(coordinates, colour, isVirtual=True)
         for neighbour in self.neighbours(coordinates):
-            if neighbour.getGroup(coordinates).colour == group.colour:
+            if self.getGroup(neighbour).colour == group.colour:
                 group.mergeGroup(neighbour)
         return group.isCaptured(self)
     
@@ -48,17 +51,20 @@ class Board:
     '''
  
     def getGroup(self, coordinates):
+        nullGroup = DotMap(colour = 'None')
+        nullGroup.id = None
+        
         for group in self.groups:
             if group.isInGroup(coordinates):
                 return group
-        return { "id": None, "colour": 0 }
+        return nullGroup
 
     '''
     isPlayable returns true if, onboard is true, isEmpty and isNotSuicide. 
     '''
                     
     def isPlayable(self, coordinates, colour):
-        return isEmpty(coordinates) and not isSuicide(coordinates,colour) and not offBoard(coordinates)
+        return self.isEmpty(coordinates) and not self.isSuicide(coordinates,colour) and not self.offBoard(coordinates)
         
     def addGroup(self, group):
         self.groups = self.groups + [group]
@@ -67,3 +73,4 @@ class Board:
         pass
 
 from group import Group
+from dotmap import DotMap
