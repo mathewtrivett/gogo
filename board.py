@@ -4,6 +4,14 @@ class Board:
         self.matrix = [['None' for x in range(self.size)] for y in range(self.size)]
         self.groups = []
 
+    def __str__(self):
+        state = ""
+        for row in self.matrix:
+            for col in row:
+                state += col + " "
+            state += "\n"
+        return state
+
     def offBoard(self,coordinates):
         offBoard = False
         for (coordinate) in coordinates:
@@ -15,7 +23,7 @@ class Board:
     ## Updating the matrix so will always return true
 
     def isEmpty(self, coordinates):
-        return self.matrix[coordinates[0]][coordinates[1]] == 0
+        return self.matrix[coordinates[0]][coordinates[1]] == 'None'
 
     '''
     Neighbours looks at coordinates N, S, E and W of a given coordinate.
@@ -60,13 +68,13 @@ class Board:
         return nullGroup
 
     '''
-    isPlayable returns true if, onboard is true, isEmpty and isNotSuicide. 
+    isPlayable returns true if not offBoard, isSuicide is true, and isEmpty is true. 
     '''
                     
     def isPlayable(self, coordinates, colour):
         return self.isEmpty(coordinates) and not self.isSuicide(coordinates,colour) and not self.offBoard(coordinates)
         
-    def addGroup(self, group):
+    def addToGroups(self, group):
         self.groups = self.groups + [group]
 
     def deleteGroup(self, group):
