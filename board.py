@@ -50,7 +50,6 @@ class Board:
         for neighbour in self.neighbours(coordinates):
             if self.getGroup(neighbour).colour == group.colour:
                 group.mergeGroup(self.getGroup(neighbour),self)
-        print(group.coordinates)
         return group.isCaptured(self)
     
     '''
