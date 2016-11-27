@@ -1,16 +1,25 @@
 class Board:
     def __init__(self,size):
         self.size = size
-        self.matrix = [['None' for x in range(self.size)] for y in range(self.size)]
         self.groups = []
 
     def __str__(self):
         state = ""
-        for row in self.matrix:
+        for row in self.getMatrix():
             for col in row:
-                state += col + " "
+                if col == 'None':
+                    state += "- "
+                else:
+                    state += col + " "
             state += "\n"
         return state
+
+    def getMatrix(self):
+        matrix = [['None' for x in range(self.size)] for y in range(self.size)]
+        for group in self.groups:
+            for (x,y) in group.coordinates:
+                matrix[y][x] = group.colour
+        return matrix
 
     def offBoard(self,coordinates):
         offBoard = False
@@ -23,7 +32,7 @@ class Board:
     ## Updating the matrix so will always return true
 
     def isEmpty(self, coordinates):
-        return self.matrix[coordinates[0]][coordinates[1]] == 'None'
+        return self.getMatrix()[coordinates[1]][coordinates[0]] == 'None'
 
     '''
     Neighbours looks at coordinates N, S, E and W of a given coordinate.
