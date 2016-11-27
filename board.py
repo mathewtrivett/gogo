@@ -38,10 +38,13 @@ class Board:
     '''
 
     def isSuicide(self,coordinates,colour):
-        group = Group(colour,[coordinates],isVirtual=True)
+        group = Group(colour,{coordinates},isVirtual=True)
+        print(group.coordinates)
+        print(self.neighbours((0,0)))
         for neighbour in self.neighbours(coordinates):
             if self.getGroup(neighbour).colour == group.colour:
-                group.mergeGroup(group,self)
+                group.mergeGroup(self.getGroup(neighbour),self)
+        print(group.coordinates)
         return group.isCaptured(self)
     
     '''
