@@ -113,6 +113,17 @@ class Board:
                 not self.isSuicide(coordinates,colour)
 
     '''
+    returns true if the player given cannot play any legal move
+    '''
+    
+    def noPlayableMoves(self, colour):
+        for x in range(self.size):
+            for y in range(self.size):
+                if self.isPlayable((x,y), colour):
+                    return False
+        return True
+    
+    '''
     Adds the group to the list
     '''
     

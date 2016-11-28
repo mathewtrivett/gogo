@@ -12,6 +12,9 @@ class Match:
     '''
     def playTurn(self):
         stonePlaced = False
+        if self.board.noPlayableMoves(self.players[self.currentPlayer].colour):
+            print("No possible moves, passing...")
+            return "passed"
         while(not stonePlaced):
             move = input(self.players[self.currentPlayer].colour + " to play:")
             if move == "pass":
@@ -39,11 +42,25 @@ class Match:
             if move == "passed":
                 if lastTurnPassed == True:
                     end = True
+                    if self.findScore(0) > self.findScore(1):
+                        winner = self.players[0].colour
+                    else:
+                        winner = self.players[1].colour
                 lastTurnPassed = True
             elif move == "quit":
+                winner = (self.currentPlayer+1)%len(self.players).colour
                 end = True
             elif move == "placedStone":
                 lastTurnPassed = False
+        print("winner is " + winner)
 
+    '''
+    Gives the current score of a player
+    '''
+    
+    def findScore(self, player):
+        score = self.players[player].prisoners
+        #for now terratory is ignored
+        return score
 from board import Board
 from player import Player
