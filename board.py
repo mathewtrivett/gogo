@@ -14,16 +14,28 @@ class Board:
             state += "\n"
         return state
 
+    '''
+    A funtion which mutates one board into another
+    '''
+
     def setTo(self, newBoard):
         self.size = newBoard.size
         self.groups = newBoard.groups
-
+        
+    '''
+    Returns a matrix representing the current state of the board
+    '''
+    
     def getMatrix(self):
         matrix = [['None' for x in range(self.size)] for y in range(self.size)]
         for group in self.groups:
             for (x,y) in group.coordinates:
                 matrix[y][x] = group.colour
         return matrix
+
+    '''
+    Returns a boolean specifing if the position is outside the confines of the board
+    '''
 
     def offBoard(self,coordinates):
         offBoard = False
@@ -32,8 +44,9 @@ class Board:
                 offBoard = True
         return offBoard
 
-    ## Currently this is looking in the Matrix for empty spaces, we arn't
-    ## Updating the matrix so will always return true
+    '''
+    Checks if a specific spot on the board contains a stone
+    '''
 
     def isEmpty(self, coordinates):
         return self.getMatrix()[coordinates[1]][coordinates[0]] == 'None'
@@ -97,23 +110,31 @@ class Board:
     def isPlayable(self, coordinates, colour):
         return self.isEmpty(coordinates) and not self.offBoard(coordinates) and not self.isSuicide(coordinates,colour)
 
-    # addToGroups is called when 
+    '''
+    Adds the group to the list and updates the groupIDs
+    '''
     
     def addToGroups(self, group):
         self.groups.append(group)
         self.updateIds()
-
+        
+    '''
+    Removes a group from the list and updates groupIds
+    '''
+    
     def deleteGroup(self, group):
         self.groups.remove(group)
         self.updateIds()
 
-    # updateIds enumerates over the board's groups and sets each group
-    # id to be its index in the list
+    '''
+    updateIds enumerates over the board's groups and sets each group
+     id to be its index in the list
+    '''
     
     def updateIds(self):
         for index, group in enumerate(self.groups):
             group.id = index
 
 from copy import deepcopy
-from group import Group
 from dotmap import DotMap
+from group import Group
