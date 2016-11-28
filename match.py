@@ -13,7 +13,7 @@ class Match:
     def playTurn(self):
         stonePlaced = False
         while(not stonePlaced):
-            coordinate = tuple(map(int,input().split(',')))
+            coordinate = tuple(map(int,input(self.players[self.currentPlayer].colour + " to play:").split(',')))
             stonePlaced = self.players[self.currentPlayer].placeStone(self.board,coordinate,self.previousBoard)
         
         self.currentPlayer = (self.currentPlayer+1)%len(self.players)
