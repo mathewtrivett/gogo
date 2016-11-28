@@ -113,29 +113,18 @@ class Board:
                 not self.isSuicide(coordinates,colour)
 
     '''
-    Adds the group to the list and updates the groupIDs
+    Adds the group to the list
     '''
     
     def addToGroups(self, group):
         self.groups.append(group)
-        self.updateIds()
         
     '''
-    Removes a group from the list and updates groupIds
+    Removes a group from the list
     '''
     
     def deleteGroup(self, group):
         self.groups.remove(group)
-        self.updateIds()
-
-    '''
-    updateIds enumerates over the board's groups and sets each group
-     id to be its index in the list
-    '''
-    
-    def updateIds(self):
-        for index, group in enumerate(self.groups):
-            group.id = index
 
 from copy import deepcopy
 from dotmap import DotMap
