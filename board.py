@@ -14,6 +14,10 @@ class Board:
             state += "\n"
         return state
 
+    def setTo(self, newBoard):
+        self.size = newBoard.size
+        self.groups = newBoard.groups
+
     def getMatrix(self):
         matrix = [['None' for x in range(self.size)] for y in range(self.size)]
         for group in self.groups:

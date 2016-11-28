@@ -11,24 +11,30 @@ class Player:
     returning a boolean which indicates if the move could be made.
     '''
     
-    def placeStone(self, board, coordinate):
-        if board.isPlayable(coordinate, self.colour):
-            #check for ko here, will likely need to be implement with board
+    def placeStone(self, currentBoard, coordinate, previousBoard = [[]]):
+        if currentBoard.isPlayable(coordinate, self.colour):
+            #everything is applied to newBoard first, for evaluating ko
+            newBoard = deepcopy(currentBoard)
+            newPrisoners = 0
             #Create the group
             newGroup = Group(self.colour, {coordinate})
-            board.addToGroups(newGroup)
+            newBoard.addToGroups(newGroup)
             #merge with friendly groups
-            for neighbour in board.neighbours(coordinate):
-                if board.getGroup(neighbour).colour == self.colour:
-                    newGroup.mergeGroup(board.getGroup(neighbour),board)
+            for neighbour in newBoard.neighbours(coordinate):
+                if newBoard.getGroup(neighbour).colour == self.colour:
+                    newGroup.mergeGroup(newBoard.getGroup(neighbour),newBoard)
             #evaluate captures
-            for neighbour in board.neighbours(coordinate):
-                if board.getGroup(neighbour).colour != 'None' and \
-                    board.getGroup(neighbour).colour != self.colour:
-                        if board.getGroup(neighbour).isCaptured(board):
-                            self.prisoners = self.prisoners + len(board.getGroup(neighbour).coordinates)
-                            board.deleteGroup(board.getGroup(neighbour))
-            return True
+            for neighbour in newBoard.neighbours(coordinate):
+                if newBoard.getGroup(neighbour).colour != 'None' and \
+                    newBoard.getGroup(neighbour).colour != self.colour:
+                        if newBoard.getGroup(neighbour).isCaptured(newBoard):
+                            newPrisoners = newPrisoners + len(newBoard.getGroup(neighbour).coordinates)
+                            newBoard.deleteGroup(newBoard.getGroup(neighbour))
+            #check for ko
+            if newBoard.getMatrix() != previousBoard:
+                currentBoard.setTo(newBoard)
+                self.prisoners = self.prisoners + newPrisoners
+                return True
         return False
     
     '''
@@ -38,4 +44,5 @@ class Player:
         return self.time > 0
 
 from board import Board
+from copy import deepcopy
 from group import Group
