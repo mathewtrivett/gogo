@@ -5,6 +5,12 @@ class Player:
         self.prisoners = 0
         self.time = time
     
+    '''
+    placeStone, checks that a move is legal, places a stone onto the specified
+    spot of the specified board. Then evaluates merges, captures and prisoners
+    returning a boolean which indicates if the move could be made.
+    '''
+    
     def placeStone(self, board, coordinate):
         if board.isPlayable(coordinate, self.colour):
             #check for ko here, will likely need to be implement with board
@@ -25,6 +31,9 @@ class Player:
             return True
         return False
     
+    '''
+    Simple returns a boolean indicating if the player is out of time.
+    '''
     def hasTime(self):
         return self.time > 0
 
