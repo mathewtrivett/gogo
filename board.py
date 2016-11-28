@@ -56,9 +56,19 @@ class Board:
 
     def isSuicide(self,coordinates,colour):
         group = Group(colour,{coordinates},isVirtual=True)
+        #first we add any neighbouring allies to the virtual group
         for neighbour in self.neighbours(coordinates):
             if self.getGroup(neighbour).colour == group.colour:
                 group.mergeGroup(self.getGroup(neighbour),self)
+        #now we check if the new stone captures anything, if so it's not suicide
+        for neighbour in self.neighbours(coordinates):
+            if self.getGroup(neighbour).colour != 'None' and \
+                self.getGroup(neighbour) != colour:
+                    potentialBoard = deepcopy(self)
+                    potentialBoard.addToGroups(group)
+                    if self.getGroup(neighbour).isCaptured(potentialBoard):
+                        return False
+        #finally check to see if the stone will be captured itself
         return group.isCaptured(self)
     
     '''
@@ -100,5 +110,6 @@ class Board:
         for index, group in enumerate(self.groups):
             group.id = index
 
+from copy import deepcopy
 from group import Group
 from dotmap import DotMap
