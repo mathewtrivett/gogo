@@ -1,21 +1,16 @@
 class Group:
     
-    def __init__(self, colour, coordinates, isVirtual = False):
+    def __init__(self, colour, coordinates):
         self.coordinates = set()
         self.colour = colour
         self.coordinates = self.coordinates.union(coordinates)
-        self.isVirtual = isVirtual #virtual groups are not on the game board and are used for analysis
-
+        
     '''
     Merges group into self, then telling the board to delete the reference to group,
-    if self is virtual then the board will remain unaffected
     '''
     def mergeGroup(self, group, board):
-        if group.id is None :
-            return
         self.coordinates = self.coordinates.union(group.coordinates)
-        if not self.isVirtual :#virtual
-            board.deleteGroup(group)
+        board.deleteGroup(group)
 
     '''
     Checks is a given coordinate belongs to the group

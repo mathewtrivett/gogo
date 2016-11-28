@@ -72,21 +72,21 @@ class Board:
     '''
 
     def isSuicide(self,coordinates,colour):
-        group = Group(colour,{coordinates},isVirtual=True)
-        #first we add any neighbouring allies to the virtual group
-        for neighbour in self.neighbours(coordinates):
-            if self.getGroup(neighbour).colour == group.colour:
-                group.mergeGroup(self.getGroup(neighbour),self)
+        group = Group(colour,{coordinates})
+        potentialBoard = deepcopy(self)
+        potentialBoard.addToGroups(group)
+        #first we add any neighbouring allies to the group
+        for neighbour in potentialBoard.neighbours(coordinates):
+            if potentialBoard.getGroup(neighbour).colour == group.colour:
+                group.mergeGroup(potentialBoard.getGroup(neighbour),potentialBoard)
         #now we check if the new stone captures anything, if so it's not suicide
-        for neighbour in self.neighbours(coordinates):
-            if self.getGroup(neighbour).colour != 'None' and \
-                self.getGroup(neighbour) != colour:
-                    potentialBoard = deepcopy(self)
-                    potentialBoard.addToGroups(group)
-                    if self.getGroup(neighbour).isCaptured(potentialBoard):
+        for neighbour in potentialBoard.neighbours(coordinates):
+            if potentialBoard.getGroup(neighbour).colour != 'None' and \
+                potentialBoard.getGroup(neighbour) != colour:
+                    if potentialBoard.getGroup(neighbour).isCaptured(potentialBoard):
                         return False
         #finally check to see if the stone will be captured itself
-        return group.isCaptured(self)
+        return group.isCaptured(potentialBoard)
     
     '''
     Get group, takes a coordinate.  Looks through the groups list,
