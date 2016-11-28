@@ -108,7 +108,9 @@ class Board:
     '''
                     
     def isPlayable(self, coordinates, colour):
-        return self.isEmpty(coordinates) and not self.offBoard(coordinates) and not self.isSuicide(coordinates,colour)
+        return not self.offBoard(coordinates) and \
+                self.isEmpty(coordinates) and \
+                not self.isSuicide(coordinates,colour)
 
     '''
     Adds the group to the list and updates the groupIDs
