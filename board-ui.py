@@ -1,8 +1,8 @@
 import pygame
 
 ## SIZE VARIABLES
-WIDTH = 1024
-HEIGHT = 768
+WIDTH = 800
+HEIGHT = 600
 FRAMERATE = 60
 BOARD_SIZE = WIDTH * 0.60
 
@@ -19,15 +19,13 @@ class Board_UI():
     global LINECOLOUR
         
     def __init__(self, grid, lineWidth=1):
-        self.grid = grid
-        self.divisor = self.grid + 1
+        self.divisor = grid + 1
         self.bg = pygame.draw.rect(screen, BOARDCOLOUR, (WIDTH * 0.2, WIDTH* 0.05, BOARD_SIZE, BOARD_SIZE))
-        self.interval = self.bg.width / self.divisor # Divides the background by the grid size + 1
+        self.interval = self.bg.width / self.divisor # Divides the background by the divisor
         self.lineWidth = lineWidth # Sets the grid's line width
+        self.origin = (self.bg.y + self.interval, self.bg.x + self.interval)
 
-    def show(self):
-        # Board Background
-       
+    def show(self):       
         for position in range(self.divisor):
                 if position == 0:
                     continue
@@ -56,24 +54,26 @@ class Timer_UI():
 
 
 class Stone_UI():
-
+    
     def __init__(self, Board_UI, colour, coordinates):
         self.board = Board_UI
         self.diameter = Board_UI.interval - 3
         self.colour = colour
-        self.coordinates = coordinates
+        self.coordinates = tuple(map(lambda x,y: x+self.board.interval*y, self.board.origin, coordinates))
 
     def show(self):
         pygame.draw.circle(screen,
                            self.colour,
-                           (int(self.board.bg.x + self.board.bg.width/2),int(self.board.bg.y + self.board.bg.height/2)),
+                           (int(self.coordinates[1]),int(self.coordinates[0])),
                            int(self.diameter/2))
 
 class Player_UI():
     pass
 
+
 class CapturedStone_UI(Stone_UI):
     pass
+
 
 pygame.init()
 screen = pygame.display.set_mode([WIDTH,HEIGHT])
@@ -83,11 +83,15 @@ pygame.display.flip()
 
 while True:
     event = pygame.event.poll()
-    board = Board_UI(9)
+    board = Board_UI(6)
     board.show()
-    black_stone = Stone_UI(board,BLACKSTONE,(0,0))
+    black_stone = Stone_UI(board,BLACKSTONE,(2,4))
     black_stone.show()
-    white_stone = Stone_UI(board,WHITESTONE,(3,3))
+    white_stone = Stone_UI(board,WHITESTONE,(0,3))
+    white_stone.show()
+    white_stone = Stone_UI(board,WHITESTONE,(1,3))
+    white_stone.show()
+    white_stone = Stone_UI(board,WHITESTONE,(1,2))
     white_stone.show()
     pygame.display.update()
     
