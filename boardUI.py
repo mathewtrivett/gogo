@@ -1,4 +1,5 @@
 import pygame
+import pygame.gfxdraw
 
 ## SIZE VARIABLES
 WIDTH = 800
@@ -7,7 +8,7 @@ FRAMERATE = 60
 BOARD_SIZE = WIDTH * 0.60
 
 ## Colours and Textures
-BG = pygame.color.THECOLORS['linen']
+BG = pygame.color.THECOLORS['grey']
 BOARDCOLOUR = pygame.color.THECOLORS['chocolate4']
 LINECOLOUR = pygame.color.THECOLORS['black']
 WHITESTONE = pygame.color.THECOLORS['linen']
@@ -53,11 +54,27 @@ class Stone_UI():
         self.colour = colour
         self.coordinates = tuple(map(lambda x,y: x+self.board.interval*y, self.board.origin, coordinates))
 
-    def show(self):
+    def place(self):
         pygame.draw.circle(screen,
                            self.colour,
                            (int(self.coordinates[1]),int(self.coordinates[0])),
                            int(self.diameter/2))
+
+    def aa(self):
+        pygame.gfxdraw.aacircle(screen,
+                                int(self.coordinates[1]),
+                                int(self.coordinates[0]),
+                                int(self.diameter/2),
+                                self.colour)
+
+        pygame.gfxdraw.filled_circle(screen,
+                                int(self.coordinates[1]),
+                                int(self.coordinates[0]),
+                                int(self.diameter/2),
+                                self.colour)
+
+    def remove(self):
+        pass
 
 
               
@@ -83,16 +100,16 @@ pygame.display.flip()
 
 while True:
     event = pygame.event.poll()
-    board = Board_UI(6)
+    board = Board_UI(19)
     board.show()
     black_stone = Stone_UI(board,BLACKSTONE,(2,4))
-    black_stone.show()
+    black_stone.aa()
     white_stone = Stone_UI(board,WHITESTONE,(0,3))
-    white_stone.show()
+    white_stone.aa()
     white_stone = Stone_UI(board,WHITESTONE,(1,3))
-    white_stone.show()
+    white_stone.aa()
     white_stone = Stone_UI(board,WHITESTONE,(1,2))
-    white_stone.show()
+    white_stone.aa()
     pygame.display.update()
     
     if event.type == pygame.QUIT :

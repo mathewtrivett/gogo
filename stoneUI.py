@@ -12,5 +12,4 @@ class Stone_UI():
                            (int(self.coordinates[1]),int(self.coordinates[0])),
                            int(self.diameter/2))
 
-
 from boardUI import Board_UI
