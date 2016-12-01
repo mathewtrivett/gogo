@@ -20,11 +20,13 @@ class Board_UI():
     global LINECOLOUR
         
     def __init__(self, grid, lineWidth=1):
+        self.grid = grid
         self.divisor = grid + 1
         self.bg = pygame.draw.rect(screen, BOARDCOLOUR, (WIDTH * 0.2, WIDTH* 0.05, BOARD_SIZE, BOARD_SIZE))
         self.interval = self.bg.width / self.divisor # Divides the background by the divisor
         self.lineWidth = lineWidth # Sets the grid's line width
         self.origin = (self.bg.y + self.interval, self.bg.x + self.interval)
+        self.coordinates = [[(y,x) for x in range(int(self.origin[0]), int(self.origin[0] + self.interval*self.grid), int(self.interval))] for y in range(int(self.origin[1]), int(self.origin[1] + self.interval*self.grid), int(self.interval))]
 
     def show(self):       
         for position in range(self.divisor):
@@ -45,6 +47,9 @@ class Board_UI():
                                  (self.bg.x + self.interval * position, self.bg.height + self.bg.y - self.interval),
                                  self.lineWidth)
 
+    def getBoardUICoords(self, coordinates):
+        return self.coordinates[coordinates[0]][coordinates[1]]
+
 
 class Stone_UI():
     
@@ -52,6 +57,7 @@ class Stone_UI():
         self.board = Board_UI
         self.diameter = Board_UI.interval - 3
         self.colour = colour
+        self.coords = coordinates
         self.coordinates = tuple(map(lambda x,y: x+self.board.interval*y, self.board.origin, coordinates))
 
     def place(self):
@@ -66,12 +72,14 @@ class Stone_UI():
                                 int(self.coordinates[0]),
                                 int(self.diameter/2),
                                 self.colour)
-
+        
         pygame.gfxdraw.filled_circle(screen,
                                 int(self.coordinates[1]),
                                 int(self.coordinates[0]),
                                 int(self.diameter/2),
                                 self.colour)
+
+        print(self.coors, int(self.coordinates[0]), int(self.coordinates[1]))
 
     def remove(self):
         pass
@@ -100,7 +108,7 @@ pygame.display.flip()
 
 while True:
     event = pygame.event.poll()
-    board = Board_UI(19)
+    board = Board_UI(12)
     board.show()
     black_stone = Stone_UI(board,BLACKSTONE,(2,4))
     black_stone.aa()
