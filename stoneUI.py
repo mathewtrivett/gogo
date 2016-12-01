@@ -1,15 +1,33 @@
-class Stone_UI():
+import pygame
+import pygame.gfxdraw
+
+class StoneUI():
     
-    def __init__(self, Board_UI, colour, coordinates):
-        self.board = Board_UI
-        self.diameter = Board_UI.interval - 3
+    def __init__(self, BoardUI, colour, coordinates, screen):
+        self.screen = screen
+        self.board = BoardUI
+        self.diameter = BoardUI.interval - 3
         self.colour = colour
-        self.coordinates = tuple(map(lambda x,y: x+self.board.interval*y, self.board.origin, coordinates))
+        self.coordinates = coordinates
+        self.position = tuple(map(lambda x,y: x+self.board.interval*y, self.board.origin, coordinates))
 
     def show(self):
-        pygame.draw.circle(screen,
-                           self.colour,
-                           (int(self.coordinates[1]),int(self.coordinates[0])),
-                           int(self.diameter/2))
+        pygame.gfxdraw.aacircle(self.screen,
+                                int(self.position[1]),
+                                int(self.position[0]),
+                                int(self.diameter/2),
+                                self.colour)
+        
+        pygame.gfxdraw.filled_circle(self.screen,
+                                int(self.position[1]),
+                                int(self.position[0]),
+                                int(self.diameter/2),
+                                self.colour)
 
-from boardUI import Board_UI
+    def move(self, mx, my):
+        # self.coords = (self.coords[0]+mx,self.coords[1]+my)
+        pass
+
+    def place(self):
+        pass
+

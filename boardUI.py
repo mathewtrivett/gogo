@@ -1,9 +1,11 @@
 import pygame
 import pygame.gfxdraw
+from stoneUI import StoneUI
+from buttonUI import ButtonUI
 
 ## SIZE VARIABLES
-WIDTH = 800
-HEIGHT = 600
+WIDTH = 1024
+HEIGHT = 768
 FRAMERATE = 60
 BOARD_SIZE = WIDTH * 0.60
 
@@ -11,10 +13,12 @@ BOARD_SIZE = WIDTH * 0.60
 BG = pygame.color.THECOLORS['grey']
 BOARDCOLOUR = pygame.color.THECOLORS['chocolate4']
 LINECOLOUR = pygame.color.THECOLORS['black']
-WHITESTONE = pygame.color.THECOLORS['linen']
-BLACKSTONE = pygame.color.THECOLORS['black']
+WHITESTONE = pygame.color.THECOLORS['antiquewhite1']
+BLACKSTONE = pygame.color.THECOLORS['grey10']
+BUTTONCOLOUR = pygame.color.THECOLORS['aquamarine3']
+BUTTONFONT = "/Library/Fonts/SourceSansPro-Regular.ttf"
 
-class Board_UI():
+class BoardUI():
     global screen
     global WIDTH
     global LINECOLOUR
@@ -26,7 +30,8 @@ class Board_UI():
         self.interval = self.bg.width / self.divisor # Divides the background by the divisor
         self.lineWidth = lineWidth # Sets the grid's line width
         self.origin = (self.bg.y + self.interval, self.bg.x + self.interval)
-        self.coordinates = [[(y,x) for x in range(int(self.origin[0]), int(self.origin[0] + self.interval*self.grid), int(self.interval))] for y in range(int(self.origin[1]), int(self.origin[1] + self.interval*self.grid), int(self.interval))]
+        self.farCorner = tuple(map(lambda x,y: x+self.interval*y, self.origin, (self.grid,self.grid)))
+        self.coordinates = [[(x,y) for x in range(int(self.origin[0]), int(self.farCorner[0]), int(self.interval))] for y in range(int(self.origin[1]), int(self.farCorner[1]), int(self.interval))]
 
     def show(self):       
         for position in range(self.divisor):
@@ -47,56 +52,8 @@ class Board_UI():
                                  (self.bg.x + self.interval * position, self.bg.height + self.bg.y - self.interval),
                                  self.lineWidth)
 
-    def getBoardUICoords(self, coordinates):
-        return self.coordinates[coordinates[0]][coordinates[1]]
-
-
-class Stone_UI():
-    
-    def __init__(self, Board_UI, colour, coordinates):
-        self.board = Board_UI
-        self.diameter = Board_UI.interval - 3
-        self.colour = colour
-        self.coords = coordinates
-        self.coordinates = tuple(map(lambda x,y: x+self.board.interval*y, self.board.origin, coordinates))
-
-    def place(self):
-        pygame.draw.circle(screen,
-                           self.colour,
-                           (int(self.coordinates[1]),int(self.coordinates[0])),
-                           int(self.diameter/2))
-
-    def aa(self):
-        pygame.gfxdraw.aacircle(screen,
-                                int(self.coordinates[1]),
-                                int(self.coordinates[0]),
-                                int(self.diameter/2),
-                                self.colour)
-        
-        pygame.gfxdraw.filled_circle(screen,
-                                int(self.coordinates[1]),
-                                int(self.coordinates[0]),
-                                int(self.diameter/2),
-                                self.colour)
-
-        print(self.coors, int(self.coordinates[0]), int(self.coordinates[1]))
-
-    def remove(self):
-        pass
-
-
-              
-class Button_UI():
-    pass
-
-
-class Timer_UI():
-    pass
-
-
-
-class Player_UI():
-    pass
+    def returnCoords(self, pixelCoords):
+        return self.coordinates[pixelCoords[0]][pixelCoords[1]]
 
 
 
@@ -105,21 +62,30 @@ screen = pygame.display.set_mode([WIDTH,HEIGHT])
 title = pygame.display.set_caption("GoGo")
 screen.fill(BG)
 pygame.display.flip()
+passbutton = ButtonUI(screen,"Pass", BUTTONCOLOUR, BUTTONFONT, 24, BLACKSTONE,
+                  (20,20),"None")
+
+quitbutton = ButtonUI(screen,"Quit", BUTTONCOLOUR, BUTTONFONT, 24, BLACKSTONE,
+                  (100,20),"None")
 
 while True:
     event = pygame.event.poll()
-    board = Board_UI(12)
+    board = BoardUI(9) 
     board.show()
-    black_stone = Stone_UI(board,BLACKSTONE,(2,4))
-    black_stone.aa()
-    white_stone = Stone_UI(board,WHITESTONE,(0,3))
-    white_stone.aa()
-    white_stone = Stone_UI(board,WHITESTONE,(1,3))
-    white_stone.aa()
-    white_stone = Stone_UI(board,WHITESTONE,(1,2))
-    white_stone.aa()
+    passbutton.draw()
+    quitbutton.draw()
+    black_stone = StoneUI(board,BLACKSTONE,(1,1),screen)
+    black_stone.show()
+    black_stone.move(1,1)
+    white_stone = StoneUI(board,WHITESTONE,(0,3),screen)
+    white_stone.show()
+    white_stone = StoneUI(board,WHITESTONE,(1,3),screen)
+    white_stone.show()
+    white_stone = StoneUI(board,WHITESTONE,(18,18),screen)
+    white_stone.show()
     pygame.display.update()
     
     if event.type == pygame.QUIT :
         break
+
 pygame.quit()
