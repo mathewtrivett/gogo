@@ -4,6 +4,7 @@ class Match:
         self.players = [Player('B',100),Player('W',100)]
         self.currentPlayer = 0
         self.board = Board(size)
+        self.territories = Board(size)
         self.previousBoard = self.board.getMatrix()
         self.currentBoard = self.board.getMatrix()
     
@@ -42,25 +43,63 @@ class Match:
             if move == "passed":
                 if lastTurnPassed == True:
                     end = True
-                    if self.findScore(0) > self.findScore(1):
-                        winner = self.players[0].colour
-                    else:
-                        winner = self.players[1].colour
+                    self.updateTerritory()
+                    winners = []
+                    winningScore = 0
+                    for player in self.players:
+                        if self.findScore(player) > winningScore:
+                            winners = [player]
+                            winningScore = self.findScore(player)
+                        elif self.findScore(player) == winningScore:
+                            winners = winners + [player]
                 lastTurnPassed = True
             elif move == "quit":
                 winner = (self.currentPlayer+1)%len(self.players).colour
                 end = True
             elif move == "placedStone":
                 lastTurnPassed = False
-        print("winner is " + winner)
+        print("Territory:\n"+str(self.territories))
+        print("Board:\n"+str(self.board))
+        winnerstr  = ""
+        for winner in winners:
+            winnerstr = winnerstr + winner.colour + "  with "\
+                + str(self.findScore(player)) + ", "
+        print("winner is " + winnerstr)
 
     '''
     Gives the current score of a player
     '''
     
     def findScore(self, player):
-        score = self.players[player].prisoners
-        #for now terratory is ignored
+        score = player.prisoners
+        for group in self.territories.groups:
+            if group.colour == player.colour:
+                score = score + len(group.coordinates)
         return score
+    
+    def updateTerritory(self):
+        for x in range(self.board.size):
+            for y in range(self.board.size):
+                if self.board.isEmpty((x,y)) and \
+                    self.territories.isEmpty((x,y)):
+                    newGroup = Group("u", {(x,y)})
+                    self.territories.addToGroups(newGroup)
+                    self.evaluateTerritory((x,y), newGroup)
+
+    def evaluateTerritory(self, position, group):
+        for neighbour in self.territories.neighbours(position):
+            if self.territories.isEmpty(neighbour):
+                if self.board.isEmpty(neighbour):
+                    newGroup = Group(group.colour, {neighbour})
+                    self.territories.addToGroups(newGroup)
+                    group.mergeGroup(newGroup, self.territories)
+                    self.evaluateTerritory(neighbour, group)
+                elif self.board.getGroup(neighbour).colour != group.colour:
+                    if group.colour == "u":
+                        group.colour = self.board.getGroup(neighbour).colour
+                    else:
+                        group.colour = "n"
+
 from board import Board
 from player import Player
+from group import Group
