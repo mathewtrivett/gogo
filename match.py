@@ -1,7 +1,7 @@
 class Match:
     
     def __init__(self, size=9):
-        self.players = [Player('B',100),Player('W',100)]
+        self.players = [Player('B',10),Player('W',100)]
         self.currentPlayer = 0
         self.board = Board(size)
         self.territories = Board(size)
@@ -20,6 +20,9 @@ class Match:
             print("No possible moves, passing...")
             return "passed"
         while(not stonePlaced):
+            if self.players[self.currentPlayer].time < 0:
+                self.currentPlayer = (self.currentPlayer+1)%len(self.players)
+                return "passed"
             move = input(self.players[self.currentPlayer].colour + " to play:")
             for e in pygame.event.get():
                 if e.type == DECREMENTCLOCK:
