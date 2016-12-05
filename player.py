@@ -4,6 +4,8 @@ class Player:
         self.colour = colour
         self.prisoners = 0
         self.time = time
+        self.passed = False
+        self.resigned = False
     
     '''
     placeStone, checks that a move is legal, places a stone onto the specified

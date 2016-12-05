@@ -12,12 +12,18 @@ class Match:
     Evaulates one turn, the return value indictates if the match should end
     '''
     def playTurn(self):
+        pygame.init()
+        DECREMENTCLOCK = pygame.USEREVENT+1
+        pygame.time.set_timer(DECREMENTCLOCK, 1000)
         stonePlaced = False
         if self.board.noPlayableMoves(self.players[self.currentPlayer].colour):
             print("No possible moves, passing...")
             return "passed"
         while(not stonePlaced):
             move = input(self.players[self.currentPlayer].colour + " to play:")
+            for e in pygame.event.get():
+                if e.type == DECREMENTCLOCK:
+                    self.players[self.currentPlayer].time -= 1
             if move == "pass":
                 self.currentPlayer = (self.currentPlayer+1)%len(self.players)
                 return "passed"
@@ -26,6 +32,7 @@ class Match:
             else:
                 coordinate = tuple(map(int,move.split(',')))
                 stonePlaced = self.players[self.currentPlayer].placeStone(self.board,coordinate,self.previousBoard)
+        print(self.players[self.currentPlayer].time)
         self.currentPlayer = (self.currentPlayer+1)%len(self.players)
         self.previousBoard = self.currentBoard
         self.currentBoard = self.board.getMatrix()
@@ -103,3 +110,4 @@ class Match:
 from board import Board
 from player import Player
 from group import Group
+import pygame
