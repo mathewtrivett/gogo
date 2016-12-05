@@ -1,18 +1,24 @@
 import pygame
 
-class ButtonUI():
+class Button():
     
-    def __init__(self, parent, text, bgColour, font,
-                 fontSize, textColour, position,
+    def __init__(self, screen, parent, text, bgColour, font,
+                 fontSize, textColour,x, y,width,height,
                  action):
+        self.screen = screen
         self.parent = parent
         self.text = text
         self.bgColour = bgColour
         self.font = font
         self.fontSize = fontSize
         self.textColour = textColour
-        self.position = position
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
         self.action = action
+        self.button = pygame.draw.rect(
+                    )
 
     def draw(self):
         if pygame.font.get_init():
