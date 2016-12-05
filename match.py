@@ -84,6 +84,10 @@ class Match:
                 score = score + len(group.coordinates)
         return score
     
+    '''
+    updates self.territories to represent the current state of board
+    '''
+    
     def updateTerritory(self):
         for x in range(self.board.size):
             for y in range(self.board.size):
@@ -93,6 +97,10 @@ class Match:
                     self.territories.addToGroups(newGroup)
                     self.evaluateTerritory((x,y), newGroup)
 
+    '''
+    called recursively by updateTerritory() to evaluate a territory group
+    '''
+    
     def evaluateTerritory(self, position, group):
         for neighbour in self.territories.neighbours(position):
             if self.territories.isEmpty(neighbour):
