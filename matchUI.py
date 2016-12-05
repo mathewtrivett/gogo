@@ -1,11 +1,12 @@
 import pygame
 import pygame.gfxdraw
 from stone import Stone
-# from buttonUI import ButtonUI
+from buttonUI import Button
 from gameboard import GameBoard
+from element import Element
 
-WIDTH = 1024
-HEIGHT = 768
+WIDTH = 640
+HEIGHT = 480
 FRAMERATE = 60
 BASELINE_GRID = WIDTH / 64
 
@@ -51,10 +52,7 @@ black = font.render("Black", True, BLACKSTONE) # Player Colour, player.colour
 white = font.render("White", True, WHITESTONE) # Player Colour, player.colour
 black_size = font.size("Black")
 white_size = font.size("White")
-pass_Button = button_text.render("PASS",True,BLACKSTONE) # Button Text
-quit_Button = button_text.render("RESIGN",True,BLACKSTONE) # Button Text
-pass_size = button_text.size("PASS")
-quit_size = button_text.size("RESIGN")
+
 
 # Player names
 screen.blit(black,(blackPlayer.width/2-black_size[0]/2,blackPlayer.height-black_size[1])) # self.screen.blit(self.text, self.width
@@ -64,24 +62,16 @@ screen.blit(white,(int(WIDTH-WIDTH * 0.2 + (white_size[0]/2)),whitePlayer.height
 screen.blit(black_time,(blackPlayer.width/2-timer_size[0]/2,0)) # self.screen(self.text, self.parent.width/2-self.text.size[0]/2,self.y)
 screen.blit(white_time,(WIDTH - WIDTH * 0.2+whitePlayer.width/2-timer_size[0]/2,0))
 
-## Buttons
-black_pass = pygame.draw.rect(screen,PASS_BUTTON_COLOUR, (0,whitePlayer.height,whitePlayer.width/2,HEIGHT*0.05)) # self.screen, self.button.colour(), (self.parent.width/2,self.screen.height * self.height)
-white_pass = pygame.draw.rect(screen,PASS_BUTTON_COLOUR,(blackPlayer.x,blackPlayer.height,blackPlayer.width/2,HEIGHT*0.05)) # self.screen, self.button.colour, 
-
-black_quit = pygame.draw.rect(screen,QUIT_BUTTON_COLOUR,(black_pass.width,blackPlayer.height,WIDTH*0.2/2,HEIGHT*0.05)) # self.screen, self.button.colour(), (self.parent.width/2,self.screen.height * self.height)
-white_quit = pygame.draw.rect(screen,QUIT_BUTTON_COLOUR,(WIDTH-white_pass.width,whitePlayer.height,WIDTH,HEIGHT*0.05))
-
-## Button Text
-screen.blit(pass_Button,(black_pass.x + black_pass.width/2-pass_size[0]/2,blackPlayer.height+black_pass.height/2-pass_size[1]/2)) 
-screen.blit(pass_Button,(white_pass.x+white_pass.width/2-pass_size[0]/2,whitePlayer.height + white_pass.height/2-pass_size[1]/2))
-screen.blit(quit_Button,(black_quit.x + black_quit.width/2-quit_size[0]/2,blackPlayer.height+black_quit.height/2-quit_size[1]/2))
-screen.blit(quit_Button,(white_quit.x + white_quit.width/2-quit_size[0]/2,whitePlayer.height+white_quit.height/2-quit_size[1]/2))
-
 # black_pass = ButtonUI(screen,)
+
+test = Element(screen,screen,"",WHITESTONE,BLACKSTONE,"d",0,0,0.1,0.1)
+test.draw()
+test.alignTopRight()
 
 while True:
     event = pygame.event.poll()
     pygame.display.update()
+    
     ## Update
     all_stones.update()
     all_stones.draw(screen)
