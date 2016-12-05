@@ -13,7 +13,7 @@ class GameBoard():
         self.image = pygame.Surface((self.parent.get_width() * self.width, self.parent.get_width() * self.width))
         self.image.fill(self.boardColour)
         self.rect = self.image.get_rect()
-        self.interval = self.rect.width / self.divisor # Board's background size by the divisor
+        self.interval = int(self.rect.width / self.divisor) # Board's background size by the divisor
         self.topX = self.parent.get_width() * 0.2
         self.topY = self.parent.get_width() * 0.05
         self.gridTopX = int(self.topX + self.interval)
@@ -33,15 +33,15 @@ class GameBoard():
             # Horizontal Grid
             pygame.draw.line(self.image,
                         self.lineColour,
-                         (self.rect.x + self.interval, self.rect.y + self.interval * position),
-                         (self.rect.x + self.image.get_width() - self.interval, self.rect.y + self.interval * position),
+                         (int(self.rect.x + self.interval), int(self.rect.y + self.interval * position)),
+                         (int(self.rect.x + self.image.get_width() - self.interval), int(self.rect.y + self.interval * position)),
                          self.lineWidth)
             
             # Vertical Grid
             pygame.draw.line(self.image,
                             self.lineColour,
-                             (self.rect.x + self.interval * position, self.rect.y + self.interval),
-                             (self.rect.x + self.interval * position, self.image.get_height() + self.rect.y - self.interval),
+                             (int(self.rect.x + self.interval * position), int(self.rect.y + self.interval)),
+                             (int(self.rect.x + self.interval * position), int(self.image.get_height() + self.rect.y - self.interval)),
                              self.lineWidth)
         self.parent.blit(self.image, (self.topX, self.topY))
 
