@@ -1,7 +1,7 @@
 import pygame
 import pygame.gfxdraw
 from stone import Stone
-from buttonUI import Button
+# from button import Button
 from gameboard import GameBoard
 from element import Element
 
@@ -64,9 +64,8 @@ screen.blit(white_time,(WIDTH - WIDTH * 0.2+whitePlayer.width/2-timer_size[0]/2,
 
 # black_pass = ButtonUI(screen,)
 
-test = Element(screen,screen,"",WHITESTONE,BLACKSTONE,"d",0,0,0.1,0.1)
+test = Element(screen,screen,"topright","",WHITESTONE,BLACKSTONE,"d",0,0,0.3,0.5)
 test.draw()
-test.alignTopRight()
 
 while True:
     event = pygame.event.poll()

@@ -31,9 +31,9 @@ class Button(Element):
     def draw(self):
         if pygame.font.get_init():
             font = pygame.font.Font(self.font, self.fontSize)
-            self.textPosition = (self.button.,font.size(self.text)/2)
-            buttonText = font.render(self.text, True, self.textColour)
-            self.screen.blit(buttonText,self.textPosition)
+ #           self.textPosition = (self.,font.size(self.text)/2)
+ #           buttonText = font.render(self.text, True, self.textColour)
+ #           self.screen.blit(buttonText,self.textPosition)
         else:
             pygame.font.init()
             draw(self)
@@ -45,7 +45,7 @@ class Button(Element):
         print(self.action)
 
 ## Buttons
-(0,whitePlayer.height,whitePlayer.width/2,HEIGHT*0.05)) # self.screen, self.button.colour(), (self.parent.width/2,self.screen.height * self.height)
+# (0,whitePlayer.height,whitePlayer.width/2,HEIGHT*0.05)) # self.screen, self.button.colour(), (self.parent.width/2,self.screen.height * self.height)
 white_pass = pygame.draw.rect(screen,PASS_BUTTON_COLOUR,(blackPlayer.x,blackPlayer.height,blackPlayer.width/2,HEIGHT*0.05)) # self.screen, self.button.colour, 
 
 black_quit = pygame.draw.rect(screen,QUIT_BUTTON_COLOUR,(black_pass.width,blackPlayer.height,WIDTH*0.2/2,HEIGHT*0.05)) # self.screen, self.button.colour(), (self.parent.width/2,self.screen.height * self.height)
