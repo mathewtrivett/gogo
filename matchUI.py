@@ -1,12 +1,12 @@
 import pygame
 import pygame.gfxdraw
 from stone import Stone
-# from button import Button
+from button import Button
 from gameboard import GameBoard
 from element import Element
 
-WIDTH = 640
-HEIGHT = 480
+WIDTH = 1024
+HEIGHT = 768
 FRAMERATE = 60
 BASELINE_GRID = WIDTH / 64
 
@@ -18,7 +18,7 @@ WHITESTONE = pygame.color.THECOLORS['antiquewhite1']
 BLACKSTONE = pygame.color.THECOLORS['grey10']
 PASS_BUTTON_COLOUR = pygame.color.THECOLORS['aquamarine3']
 QUIT_BUTTON_COLOUR = pygame.color.Color(233, 80, 80, 255)
-BUTTONFONT = "/Library/Fonts/SourceSansPro-Regular.ttf"
+FONT = "./font/SourceSansPro-Regular.ttf"
 
 ## SETUP Pygame Environment
 pygame.init()
@@ -33,17 +33,34 @@ all_stones = pygame.sprite.Group()
 white_stone = Stone(board,WHITESTONE,screen)
 all_stones.add(white_stone)
 
-## Player Areas
-pygame.draw.rect(screen,BLACKSTONE,(0,0,WIDTH * 0.2, HEIGHT)) # Player area 
-pygame.draw.rect(screen,WHITESTONE,(WIDTH - WIDTH * 0.2,0,WIDTH,HEIGHT)) # Player area
 
-whitePlayer = pygame.draw.rect(screen,WHITESTONE,(0,0,WIDTH * 0.2, HEIGHT * 0.18)) # (surface, opponentColour, parent.x,parent.y, parent.bottomright,% of parent height as variable) 
-blackPlayer = pygame.draw.rect(screen,BLACKSTONE,(WIDTH - WIDTH * 0.2,0,WIDTH,HEIGHT*0.18)) # (surface, opponentColour, parent.x, parent.y, parent.bottomright,% of parent height as variable)
+## Player Areas
+black = Element(screen,screen,'topleft','Black',FONT,1,WHITESTONE,BLACKSTONE,WHITESTONE,0,0,0.2,1)
+black.draw()
+white = Element(screen,screen,'topright','White',FONT,1,BLACKSTONE,WHITESTONE,BLACKSTONE,0,0,0.2,1)
+white.draw()
+
+blackPlayer = Element(screen,black,'topleft','Black',FONT,1,BLACKSTONE,WHITESTONE,BLACKSTONE,0,0,1,0.18)
+whitePlayer = Element(screen,white,'topright','White',FONT,1,WHITESTONE,BLACKSTONE,WHITESTONE,0,0,1,0.18)
+blackPlayer.draw()
+whitePlayer.draw()
+
+passButton = Button(screen,blackPlayer,'bottomleft','Pass',FONT,1,
+                    WHITESTONE,PASS_BUTTON_COLOUR,BLACKSTONE,0,0,0.5,0.3,"Pass")
+quitButton = Button(screen,blackPlayer,'bottomright','Quit',FONT,1,
+                    WHITESTONE,QUIT_BUTTON_COLOUR,BLACKSTONE,0,0,0.5,0.3,"Quit")
+passButton.draw()
+quitButton.draw()
+passButton.onClick()
+quitButton.onClick()
+
+# whitePlayer = pygame.draw.rect(screen,WHITESTONE,(0,0,WIDTH * 0.2, HEIGHT * 0.18)) # (surface, opponentColour, parent.x,parent.y, parent.bottomright,% of parent height as variable) 
+# blackPlayer = pygame.draw.rect(screen,BLACKSTONE,(WIDTH - WIDTH * 0.2,0,WIDTH,HEIGHT*0.18)) # (surface, opponentColour, parent.x, parent.y, parent.bottomright,% of parent height as variable)
 
 ## Fonts
-font = pygame.font.Font(BUTTONFONT, int(BASELINE_GRID*2.2)) # (Font, Fontsize)
-timer = pygame.font.Font(BUTTONFONT, int(BASELINE_GRID*4.2)) # (Font, Fontsize)
-button_text = pygame.font.Font(BUTTONFONT,int(BASELINE_GRID*1.6)) # (Font, Fontsize)
+font = pygame.font.Font(FONT, int(BASELINE_GRID*2.2)) # (Font, Fontsize)
+timer = pygame.font.Font(FONT, int(BASELINE_GRID*4.2)) # (Font, Fontsize)
+button_text = pygame.font.Font(FONT,int(BASELINE_GRID*1.6)) # (Font, Fontsize)
 
 black_time = timer.render("3:00",True,BLACKSTONE) # Timer value
 white_time = timer.render("2:14",True, WHITESTONE) # Timer value
@@ -63,9 +80,6 @@ screen.blit(black_time,(blackPlayer.width/2-timer_size[0]/2,0)) # self.screen(se
 screen.blit(white_time,(WIDTH - WIDTH * 0.2+whitePlayer.width/2-timer_size[0]/2,0))
 
 # black_pass = ButtonUI(screen,)
-
-test = Element(screen,screen,"topright","",WHITESTONE,BLACKSTONE,"d",0,0,0.3,0.5)
-test.draw()
 
 while True:
     event = pygame.event.poll()
