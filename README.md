@@ -39,12 +39,12 @@ Go is a classic turn based strategy game for two players.  Your goal is to surro
 
 #### Placing Stones
 
-Players take it in turns to place stones on the intersecting lines on the board.
+Players take it in turns to place stones on the points made by intersecting lines on the board.  When two or more of your stones connect either vertically or horizontally, they become part of a group.  A group essentially behaves in the same way as a single stone
 
 
 #### Liberties
 
-The lines on the board are called liberties.  You can think of liberties as life lines to each stone.  When a group of a player's stones are surrounded by their opponent, they no longer have any liberties and they are taken as prisoners.
+The lines on the board are called liberties.  You can think of liberties as life lines to each stone.  When a group of your stones are surrounded by your opponent, that group no longer has liberties and they are taken as prisoners.
 
 
 #### Winning GoGo
@@ -68,6 +68,7 @@ Players can resign, handing the win to their opponent.
 
 #### Suicide
 
+You can't play a stone on a point that would mean you immediately had no liberties.  That would be SUICIDE!!!  Although
 
 #### Ko
 
