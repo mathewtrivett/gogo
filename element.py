@@ -33,6 +33,10 @@ class Element():
         if self.align == 'bottomright':
             self.x, self.y = (self.parentSize.bottomright[0] - self.width,self.parentSize.bottomright[1])
 
+        self.rect = pygame.Rect(
+                    self.x,self.y,
+                    self.width,self.height)
+                    
     def draw(self):
         self.rect = pygame.draw.rect(
                     self.screen,

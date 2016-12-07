@@ -12,5 +12,6 @@ class Timer(Element):
                                  text, font, BASELINEGRID, fontSizeRelative,
                                  bgColour,contrastColour,
                                  widthDecimalPercent,heightDecimalPercent)
+        
     def update(self,ticks):
         self.text = ticks
