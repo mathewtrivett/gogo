@@ -24,10 +24,10 @@ class Player(Element):
               bgColour,contrastColour,
               1,0.2)
         
-        self.quitButton = Button(screen,self,'topleft',
-                    'Pass',font,BASELINEGRID,BUTTON_FONTSIZE,
-                    PASS_BUTTON_COLOUR,BUTTON_FONT_COLOUR,
-                    0.5,0.06,"Pass")
+        self.quitButton = Button(screen,self,'topright',
+                    'Quit',font,BASELINEGRID,BUTTON_FONTSIZE,
+                    QUIT_BUTTON_COLOUR,BUTTON_FONT_COLOUR,
+                    0.5,0.06,"Quit")
 
         self.passButton = Button(screen,self,'topleft',
                     'Pass',font,BASELINEGRID,BUTTON_FONTSIZE,
