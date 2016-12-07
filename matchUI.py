@@ -11,7 +11,7 @@ WIDTH = 1024
 HEIGHT = 768
 FRAMERATE = 60
 BASELINE_GRID = WIDTH / 64
-
+ACTIVE_PLAYER_OUTLINE = int(BASELINE_GRID/3)
 
 ## Colours and Textures
 BG = pygame.color.THECOLORS['grey']
@@ -51,7 +51,7 @@ black = Player(screen,screen,'topleft',
 
 black.draw()
 black.positionText(0.5,0.24)
-black.setActive(5)
+black.setActive(ACTIVE_PLAYER_OUTLINE)
 
 ## Timer
 blackTimer = Timer(screen,black,'topleft',
@@ -87,7 +87,7 @@ white = Player(screen,screen,'topright',
 
 white.draw()
 white.positionText(0.5,0.24)
-white.setActive(5)
+white.setActive(ACTIVE_PLAYER_OUTLINE)
 
 ## Timer
 whiteTimer = Timer(screen,white,'topleft',
@@ -95,6 +95,7 @@ whiteTimer = Timer(screen,white,'topleft',
               WHITESTONE,BLACKSTONE,
               1,0.2)
 whiteTimer.draw()
+whiteTimer.update("1:38")
 whiteTimer.positionText(0.5,1)
 
 
