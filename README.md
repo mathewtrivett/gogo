@@ -44,21 +44,26 @@ Players take it in turns to place stones on the intersecting lines on the board.
 
 #### Liberties
 
-The lines on the board are called liberties.  You can think of liberties as life lines to each stone.
-When all liberties are cut off to a group of player's stones, by being surrounded by their opponent, then they are taken as prisoners.
-
+The lines on the board are called liberties.  You can think of liberties as life lines to each stone.  When a group of a player's stones are surrounded by their opponent, they no longer have any liberties and they are taken as prisoners.
 
 
 #### Winning GoGo
 
 + **Timeout**
+
 If a player runs out of time, they automatically lose.
 
 + **Pass**
+
 Players can pass.  A consecutive pass from each player ends the game and the game is scored.  The winner is the player with the most prisoners and territory.
 
 + **Resign**
-Players can resign.  Handing the win over to their opponent.
+
+Players can resign, handing the win to their opponent.
+
+
+#### Scoring
+
 
 
 #### Suicide
