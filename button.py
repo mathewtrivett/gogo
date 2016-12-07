@@ -5,13 +5,13 @@ class Button(Element):
     def __init__(self,screen,parent,align,
                  text, font,BASELINEGRID,fontSizeRelative, 
                  bgColour,contrastColour,
-                 left,top,widthDecimalPercent,heightDecimalPercent,
+                 widthDecimalPercent,heightDecimalPercent,
                  action):
 
         super(Button, self).__init__(screen, parent, align,
                                      text,font,BASELINEGRID,fontSizeRelative,
                                      bgColour,contrastColour,
-                                     left, top, widthDecimalPercent,heightDecimalPercent
+                                     widthDecimalPercent,heightDecimalPercent
                                      )
         self.action = action
         
