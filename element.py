@@ -3,7 +3,7 @@ import pygame
 class Element():
     def __init__(self, screen, parent, align,
                  text, font, BASELINEGRID, fontSizeRelative,
-                 textColour,bgColour,contrastColour,
+                 bgColour,contrastColour,
                  left, top, widthDecimalPercent,heightDecimalPercent
                  ):
         self.screen = screen
@@ -17,7 +17,6 @@ class Element():
         self.font = font
         self.BASELINE_GRID = BASELINEGRID
         self.fontSize = fontSizeRelative
-        self.textColour = textColour
         self.bgColour = bgColour
         self.contrastColour = contrastColour
         self.widthDecimalPercent = widthDecimalPercent
@@ -45,7 +44,7 @@ class Element():
         font = pygame.font.Font(self.font,
                                 int(self.BASELINE_GRID*self.fontSize))
         self.textSize = font.size(self.text)
-        text = font.render(self.text,True,self.textColour)
+        text = font.render(self.text,True,self.contrastColour)
         self.screen.blit(text,
                          (self.x+(self.width)*x-self.textSize[0]*x,
                           self.y+(self.height)*y-self.textSize[1]*y))

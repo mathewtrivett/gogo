@@ -4,20 +4,24 @@ from element import Element
 class Button(Element):
     def __init__(self,screen,parent,align,
                  text, font,BASELINEGRID,fontSizeRelative, 
-                 textColour,bgColour,contrastColour,
+                 bgColour,contrastColour,
                  left,top,widthDecimalPercent,heightDecimalPercent,
                  action):
 
         super(Button, self).__init__(screen, parent, align,
-                                     text, font, BASELINEGRID,fontSizeRelative,
-                                     textColour,bgColour,contrastColour,
+                                     text,font,BASELINEGRID,fontSizeRelative,
+                                     bgColour,contrastColour,
                                      left, top, widthDecimalPercent,heightDecimalPercent
                                      )
         self.action = action
         
     def onHover(self):
-        pass
+        if self.rect.collidepoint(pygame.mouse.get_pos()):
+            print("Hovering")
 
     def onClick(self):
-        print(self.action)
+        event = pygame.event.poll()
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if self.rect.collidepoint(pygame.mouse.get_pos()):
+                print(self.action)
 

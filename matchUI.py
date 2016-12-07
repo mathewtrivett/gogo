@@ -43,41 +43,28 @@ all_stones.add(white_stone)
 
 
 ## UI Elements
-black = Element(screen,screen,'topleft','Black',
-                FONT,BASELINE_GRID,1,
-                WHITESTONE,BLACKSTONE,WHITESTONE,
+black = Element(screen,screen,'topleft',
+                'Black',FONT,BASELINE_GRID,FONTSIZE,
+                BLACKSTONE,WHITESTONE,
                 0,0,0.2,1)
 
-white = Element(screen,screen,'topright','White',
-                FONT,BASELINE_GRID,1,
-                BLACKSTONE,WHITESTONE,BLACKSTONE,
+white = Element(screen,screen,'topright',
+                'White',FONT,BASELINE_GRID,FONTSIZE,
+                WHITESTONE,BLACKSTONE,
                 0,0,0.2,1)
 black.draw()
+black.positionText(0.5,0.24)
 white.draw()
+white.positionText(0.5,0.24)
 
-blackPlayer = Element(screen,black,'topleft','Black',
-                      FONT,BASELINE_GRID,FONTSIZE,
-                      BLACKSTONE,WHITESTONE,BLACKSTONE,
-                      0,0,1,0.18)
-
-whitePlayer = Element(screen,white,'topright','White',
-                      FONT,BASELINE_GRID,FONTSIZE,
-                      WHITESTONE,BLACKSTONE,WHITESTONE,
-                      0,0,1,0.18)
-
-blackPlayer.draw()
-blackPlayer.positionText(0.5,1)
-whitePlayer.draw()
-whitePlayer.positionText(0.5,1)
-
-bPassButton = Button(screen,blackPlayer,'bottomleft',
+bPassButton = Button(screen,black,'topleft',
                     'Pass',FONT,BASELINE_GRID,BUTTON_FONTSIZE,
-                    BLACKSTONE,PASS_BUTTON_COLOUR,BLACKSTONE,
-                    0,0,0.5,0.3,"Pass")
-bQuitButton = Button(screen,blackPlayer,'bottomright',
+                    PASS_BUTTON_COLOUR,BLACKSTONE,
+                    0,0,0.5,0.06,"Pass")
+bQuitButton = Button(screen,black,'topright',
                     'Quit',FONT,BASELINE_GRID,BUTTON_FONTSIZE,
-                    BLACKSTONE,QUIT_BUTTON_COLOUR,BLACKSTONE,
-                    0,0,0.5,0.3,"Quit")
+                    QUIT_BUTTON_COLOUR,BLACKSTONE,
+                    0,0,0.5,0.06,"Quit")
 
 bPassButton.draw()
 bPassButton.positionText(0.5,0.5)
@@ -86,14 +73,14 @@ bPassButton.onClick()
 bQuitButton.positionText(0.5,0.5)
 bQuitButton.onClick()
 
-wPassButton = Button(screen,whitePlayer,'bottomleft',
+wPassButton = Button(screen,white,'topleft',
                     'Pass',FONT,BASELINE_GRID,BUTTON_FONTSIZE,
-                    BLACKSTONE,PASS_BUTTON_COLOUR,BLACKSTONE,
-                    0,0,0.5,0.3,"Pass")
-wQuitButton = Button(screen,whitePlayer,'bottomright',
+                    PASS_BUTTON_COLOUR,BLACKSTONE,
+                    0,0,0.5,0.06,"Pass")
+wQuitButton = Button(screen,white,'topright',
                     'Quit',FONT,BASELINE_GRID,BUTTON_FONTSIZE,
-                    BLACKSTONE,QUIT_BUTTON_COLOUR,BLACKSTONE,
-                    0,0,0.5,0.3,"Quit")
+                    QUIT_BUTTON_COLOUR,BLACKSTONE,
+                    0,0,0.5,0.06,"Quit")
 
 wPassButton.draw()
 wPassButton.positionText(0.5,0.5)
@@ -123,6 +110,10 @@ wQuitButton.onClick()
 while True:
     event = pygame.event.poll()
     pygame.display.update()
+    wPassButton.onHover()
+    wQuitButton.onHover()
+    wPassButton.onClick()
+    
     
     ## Update
     all_stones.update()
