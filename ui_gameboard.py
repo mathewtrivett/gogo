@@ -2,20 +2,18 @@ import pygame
 from ui_element import UIElement
 
 class UIGameBoard(UIElement):
-    def __init__(self, screen, parent, align,
+    def __init__(self, screen, parent,
                 text, font, BASELINEGRID, fontSizeRelative,
                 bgColour, contrastColour,
                 widthDecimalPercent, heightDecimalPercent,
                 boardSize, lineWidth,left,top):
-        super(UIGameBoard,self).__init__(screen, parent, align,
+        super(UIGameBoard,self).__init__(screen, parent,
                                     text, font, BASELINEGRID, fontSizeRelative,
                                     bgColour, contrastColour,
                                     widthDecimalPercent, heightDecimalPercent,left,top)
         
         # Backboard
         self.boardSize = boardSize + 1 ## Board plus 1 as a way to build the iterator for lines
-        self.x = (self.parentSize.x + self.parentSize.width) * left
-        self.y = (self.parentSize.y + self.parentSize.height) * top
         self.interval = self.width / self.boardSize # Board's background size by the divisor
         
         # Grid

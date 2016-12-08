@@ -5,34 +5,34 @@ from ui_button import UIButton
 
 class UIPlayer(UIElement):
     
-    def __init__(self, screen, parent, align,
+    def __init__(self, screen, parent,
                  text, font, BASELINEGRID, fontSizeRelative,
                  bgColour,contrastColour,
                  widthDecimalPercent,heightDecimalPercent,
                  isActive,TIMER_FONTSIZE,BUTTON_FONTSIZE,
                     PASS_BUTTON_COLOUR, QUIT_BUTTON_COLOUR,
-                    BUTTON_FONT_COLOUR):
+                    BUTTON_FONT_COLOUR,left, top):
 
-        super(UIPlayer, self).__init__(screen, parent, align,
+        super(UIPlayer, self).__init__(screen, parent,
                                      text, font, BASELINEGRID, fontSizeRelative,
                                      bgColour,contrastColour,
-                                     widthDecimalPercent,heightDecimalPercent)
+                                     widthDecimalPercent,heightDecimalPercent,left,top)
         self.isActive = isActive
 
-        self.timer = UITimer(screen,self,'topleft',
+        self.timer = UITimer(screen,self,
               "3:00",font,BASELINEGRID,TIMER_FONTSIZE,
               bgColour,contrastColour,
-              1,0.2)
+              1,0.2,0,0)
         
-        self.quitButton = UIButton(screen,self,'topright',
+        self.quitButton = UIButton(screen,self,
                     'Quit',font,BASELINEGRID,BUTTON_FONTSIZE,
                     QUIT_BUTTON_COLOUR,BUTTON_FONT_COLOUR,
-                    0.5,0.06,"Quit")
+                    0.5,0.06,"Quit",0.5,0)
 
-        self.passButton = UIButton(screen,self,'topleft',
+        self.passButton = UIButton(screen,self,
                     'Pass',font,BASELINEGRID,BUTTON_FONTSIZE,
                     PASS_BUTTON_COLOUR,BUTTON_FONT_COLOUR,
-                    0.5,0.06,"Pass")
+                    0.5,0.06,"Pass",0,0)
 
     def drawActivePlayerBorder(self,padding):
         points = ((self.textX-padding*2, self.textY-padding),
