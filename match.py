@@ -7,7 +7,7 @@ class Match:
         self.territories = Board(size)
         self.previousBoard = self.board.getMatrix()
         self.currentBoard = self.board.getMatrix()
-        self.UI = MatchUI(size)
+        self.UI = UIMatch(size)
     
     '''
     Evaulates one turn, the return value indictates if the match should end
@@ -124,4 +124,4 @@ from board import Board
 from player import Player
 from group import Group
 import pygame
-from matchUI import MatchUI
+from ui_match import UIMatch
