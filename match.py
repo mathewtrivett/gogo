@@ -9,75 +9,55 @@ class Match:
         self.currentBoard = self.board.getMatrix()
         self.UI = UIMatch(size)
         self.cursor = Cursor(self.board)
-        
+        self.attemptedPlace = False
+        self.handler = EventHandler()
     '''
     Evaulates one turn, the return value indictates if the match should end
     '''
     def playTurn(self):
-        pygame.init()
-        DECREMENTCLOCK = pygame.USEREVENT+1
-        pygame.time.set_timer(DECREMENTCLOCK, 1000)
         stonePlaced = False
         if self.board.noPlayableMoves(self.players[self.currentPlayer].colour):
             print("No possible moves, passing...")
-            return "passed"
+            self.players[self.currentPlayer].passed = True
         while(not stonePlaced):
-            if self.players[self.currentPlayer].time < 0:
-                self.currentPlayer = (self.currentPlayer+1)%len(self.players)
-                return "passed"
-            move = input(self.players[self.currentPlayer].colour + " to play:")
-            for e in pygame.event.get():
-                if e.type == DECREMENTCLOCK:
-                    self.players[self.currentPlayer].time -= 1
-            if move == "pass":
-                self.currentPlayer = (self.currentPlayer+1)%len(self.players)
-                return "passed"
-            elif move == "quit":
-                return "quit"
-            else:
-                coordinate = tuple(map(int,move.split(',')))
-                stonePlaced = self.players[self.currentPlayer].placeStone(self.board,coordinate,self.previousBoard)
-        print(self.players[self.currentPlayer].time)
+            if self.players[self.currentPlayer].time <= 0:
+                self.players[self.currentPlayer].passed = True
+            self.attemptedPlace = False
+            self.lookForInput()
+            self.UI.update(self.currentBoard, self.currentPlayer,
+                           self.players[0].time,self.players[1].time,
+                           self.cursor.coordinates)
+            print("a")
+            if self.players[self.currentPlayer].passed == True:
+                break
+            print("b")
+            if self.players[self.currentPlayer].resigned == True:
+                break
+            if self.attemptedPlace == True:
+                if self.players[self.currentPlayer].placeStone(
+                    self.board,self.cursor.coordinates,
+                    self.previousBoard) == True:
+                    break
         self.currentPlayer = (self.currentPlayer+1)%len(self.players)
         self.previousBoard = self.currentBoard
         self.currentBoard = self.board.getMatrix()
-        print(self.board)
-        return "placedStone"
     
     '''
     The main loop of the match
     '''
     def matchLoop(self):
+        self.UI.update(self.currentBoard, self.currentPlayer,
+                        self.players[0].time,self.players[1].time,
+                        self.cursor.coordinates)
         end = False
         lastTurnPassed = False
         while(not end):
-            self.UI.update(self.currentBoard, self.currentPlayer,
-                           self.players[0].time,self.players[1].time,
-                           self.cursor.coordinates)
-            move = self.playTurn()
-            if move == "passed":
-                if lastTurnPassed == True:
-                    end = True
-                    self.updateTerritory()
-                    winners = []
-                    winningScore = 0
-                    for player in self.players:
-                        if self.findScore(player) > winningScore:
-                            winners = [player]
-                            winningScore = self.findScore(player)
-                        elif self.findScore(player) == winningScore:
-                            winners = winners + [player]
-                lastTurnPassed = True
-            elif move == "quit":
-                winner = (self.currentPlayer+1)%len(self.players).colour
-                end = True
-            elif move == "placedStone":
-                lastTurnPassed = False
-        winnerstr  = ""
-        for winner in winners:
-            winnerstr = winnerstr + winner.colour + "  with "\
-                + str(self.findScore(player)) + ", "
-        print("winner is " + winnerstr)
+            self.playTurn()
+            if self.players.[currentPlayer].passed == True and\
+                self.players.[currentPlayer+1%len(self.players)].passed ==True:
+                #end game
+            if self.players.[currentPlayer].resigned == True:
+                #also end game
         self.UI.quit()
 
     '''
@@ -126,20 +106,23 @@ class Match:
     Looks for any of the allowed inputs to any resolves the relvent action
     '''
     def lookForInput(self):
-        inp = Inputs()
-        if inp.hasQuit():
+        self.handler.update()
+        self.players[self.currentPlayer].time -= self.handler.getTimePassed()
+        if self.handler.hasQuit():
             self.UI.quit()
-        if inp.keyWasPressed(pygame.K_LEFT):
+        if self.handler.keyWasPressed(pygame.K_SPACE):
+            self.attemptedPlace = True
+        if self.handler.keyWasPressed(pygame.K_LEFT):
             self.cursor.moveBy((-1,0))
-        if inp.keyWasPressed(pygame.K_RIGHT):
+        if self.handler.keyWasPressed(pygame.K_RIGHT):
             self.cursor.moveBy((1,0))
-        if inp.keyWasPressed(pygame.K_UP):
+        if self.handler.keyWasPressed(pygame.K_UP):
             self.cursor.moveBy((0,-1))
-        if inp.keyWasPressed(pygame.K_DOWN):
+        if self.handler.keyWasPressed(pygame.K_DOWN):
             self.cursor.moveBy((0,1))
             
 from cursor import Cursor
-from inputs import Inputs
+from eventHandler import EventHandler
 from board import Board
 from player import Player
 from group import Group

@@ -70,9 +70,9 @@ class UIMatch():
         self.cursor = UICursor(self.board,self.screen, self.QUIT_BUTTON_COLOUR)
         
     def update(self, stoneMatrix, activePlayer, blackTime, whiteTime, cursorPos):
-        whiteTimeStr = "{} : {}".format(whiteTime//60,whiteTime%60)
+        whiteTimeStr = "{} : {:02d}".format(whiteTime//60,whiteTime%60)
         self.whitePlayer.timer.update(whiteTimeStr)
-        blackTimeStr = "{} : {}".format(blackTime//60,blackTime%60)
+        blackTimeStr = "{} : {:02d}".format(blackTime//60,blackTime%60)
         self.blackPlayer.timer.update(blackTimeStr)
 
         if activePlayer == 0:
