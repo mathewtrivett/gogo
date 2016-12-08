@@ -29,7 +29,6 @@ class UIGameBoard(UIElement):
         self.draw()
         for position in range(len(self.coordinates)):
             # Horizontal Lines
-            print(self.getPixelPos((0,position)))
             pygame.draw.line(self.screen,
                              self.contrastColour,
                             (self.getPixelPos((0,position))),
