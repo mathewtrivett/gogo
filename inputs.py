@@ -5,10 +5,10 @@ class Inputs():
     def __init__(self):
         
         pygame.init()
-
         pygame.display.set_mode((100, 100))
         while True:
             keysPressed = pygame.key.get_pressed()
+            print(keysPressed)
             if keysPressed[pygame.K_a]:
                 print(a)
         
