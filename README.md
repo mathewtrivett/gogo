@@ -36,11 +36,14 @@ To play GoGo:
 
 #### Controls
 
-![Move Cursor Controls](/README_IMG/Move_Cursor_controls.png "Move controls")
+![Left Player's Move Cursor Controls](/README_IMG/arrows_move_cursor_controls.png "Left Player Arrows move controls")
+
+![Right Player's Move Cursor Controls](/README_IMG/wasd_move_cursor_controls.png "Right Player WASD move controls")
 
 ##### Move your cursor around the board to select a point using the arrow keys.
 
-![Place Stone Controls](/README_IMG/Place_Stone_controls.png "Place controls")
+![Left Player Place Stone Controls](/README_IMG/space_place_stone_controls.png "Left Player Place controls")
+![Right Player Place Stone Controls](/README_IMG/enter_place_stone_controls.png "Right Player Place controls")
 
 ##### Press Spacebar to place your stone.
 
