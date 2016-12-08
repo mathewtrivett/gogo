@@ -34,20 +34,21 @@ To play GoGo:
 ## Playing Gogo
 
 
-#### Placing Stones
-
-Players take it in turns to place stones on the points made by intersecting lines on the board.  When two or more of your stones immediately connect vertically or horizontally, they become part of a group. Groups behave in the same way as single stones and so must be completely surrounded to be captured.  Stones of the same colour diagonal to each other are not part of a group.
-
-
 #### Controls
 
 ![Move Cursor Controls](/README_IMG/Move_Cursor_controls.png "Move controls")
 
-##### Move your cursor around the board to select your point.
+##### Move your cursor around the board to select a point using the arrow keys.
 
 ![Place Stone Controls](/README_IMG/Place_Stone_controls.png "Place controls")
 
-#####Press Spacebar to place a stone.
+##### Press Spacebar to place your stone.
+
+
+#### Placing Stones
+
+Players take it in turns to place stones on the points made by intersecting lines on the board.  When two or more of your stones immediately connect vertically or horizontally, they become part of a group. Groups behave in the same way as single stones and so must be completely surrounded to be captured.  Stones of the same colour diagonal to each other are not part of a group.
+
 
 #### Liberties
 
