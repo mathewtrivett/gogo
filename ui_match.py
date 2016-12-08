@@ -10,8 +10,6 @@ from ui_stones import UIStones
 from ui_cursor import UICursor
 
 
-
-
 class UIMatch():
     
     def __init__(self,boardSize):
@@ -44,29 +42,28 @@ class UIMatch():
         self.screen = pygame.display.set_mode([self.WIDTH,self.HEIGHT])
         pygame.display.set_caption("GoGo")
         
-        
         #Create the players sidebars
-        self.blackPlayer = UIPlayer(self.screen,self.screen,'topleft',
+        self.blackPlayer = UIPlayer(self.screen,self.screen,
                 'Black',self.FONT,self.BASELINE_GRID,self.FONTSIZE,
                 self.BLACKSTONE,self.WHITESTONE,
                 0.2,1,True,self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
                     self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
-                    self.BUTTON_FONT_COLOUR)
+                    self.BUTTON_FONT_COLOUR,0,0)
         
-        self.whitePlayer = UIPlayer(self.screen,self.screen,'topright',
+        self.whitePlayer = UIPlayer(self.screen,self.screen,
                 'White',self.FONT,self.BASELINE_GRID,self.FONTSIZE,
                 self.WHITESTONE,self.BLACKSTONE,
                 0.2,1,False,self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
                     self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
-                    self.BUTTON_FONT_COLOUR)
+                    self.BUTTON_FONT_COLOUR,0.8,0)
         
-        self.board = UIGameBoard(self.screen,self.screen,"","",self.FONT,
+        self.board = UIGameBoard(self.screen,self.screen,"",self.FONT,
                                  self.BASELINE_GRID, self.FONTSIZE,
                                  self.BOARDCOLOUR,self.LINECOLOUR,
                                  0.6,self.WIDTH/self.HEIGHT*0.6,
                                  self.boardSize, 1, 0.2, 0.06)
         
-        self.stones = UIStones([["B"],["W"]], self.screen, self.board,'topleft',
+        self.stones = UIStones([["B"],["W"]], self.screen, self.board,
                              '',self.FONT, self.BASELINE_GRID, self.FONTSIZE,
                              self.WHITESTONE, self.BLACKSTONE,1,1,self.board)
         
@@ -84,9 +81,6 @@ class UIMatch():
         elif activePlayer == 1:
             self.blackPlayer.isActive = False
             self.whitePlayer.isActive = True
-        
-        
-        
         
         self.screen.fill(self.BOARDCOLOUR)
         self.blackPlayer.update()

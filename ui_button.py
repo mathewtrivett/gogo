@@ -2,17 +2,17 @@ import pygame
 from ui_element import UIElement
 
 class UIButton(UIElement):
-    def __init__(self,screen,parent,align,
+    def __init__(self,screen,parent,
                  text, font,BASELINEGRID,fontSizeRelative, 
                  bgColour,contrastColour,
                  widthDecimalPercent,heightDecimalPercent,
-                 action):
+                 action,left,top):
 
-        super(UIButton, self).__init__(screen, parent, align,
+        super(UIButton, self).__init__(screen, parent,
                                      text,font,BASELINEGRID,fontSizeRelative,
                                      bgColour,contrastColour,
-                                     widthDecimalPercent,heightDecimalPercent
-                                     )
+                                     widthDecimalPercent,heightDecimalPercent,
+                                     left,top)
         self.action = action
         
     def onHover(self):

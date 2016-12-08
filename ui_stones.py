@@ -6,12 +6,12 @@ from ui_stone import UIStone
 class UIStones(UIElement):
     
     def __init__(self, stoneMatrix
-                 ,screen, parent, align,
+                 ,screen, parent,
                 text,font,BASELINEGRID,fontSizeRelative,
                 bgColour,contrastColour,
                 widthDecimalPercent,heightDecimalPercent, board):
         
-        super(UIStones, self).__init__(screen, parent, align,
+        super(UIStones, self).__init__(screen, parent,
                                      text,font,BASELINEGRID,fontSizeRelative,
                                      bgColour,contrastColour,
                                      widthDecimalPercent,heightDecimalPercent)
