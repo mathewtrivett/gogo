@@ -4,7 +4,7 @@ from ui_element import UIElement
 class UIButton(UIElement):
     def __init__(self,screen,parent,
                  text, font,BASELINEGRID,fontSizeRelative, 
-                 bgColour,contrastColour,
+                 bgColour,contrastColour,hoverColour,
                  widthDecimalPercent,heightDecimalPercent,
                  action,left,top):
 
@@ -14,9 +14,12 @@ class UIButton(UIElement):
                                      widthDecimalPercent,heightDecimalPercent,
                                      left,top)
         self.action = action
+        self.hoverColour = hoverColour
         
     def onHover(self):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
+            self.bgColour = self.hoverColour
+            self.draw()
             print("Hovering")
 
     def onClick(self):
@@ -24,4 +27,3 @@ class UIButton(UIElement):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.rect.collidepoint(pygame.mouse.get_pos()):
                 print(self.action)
-
