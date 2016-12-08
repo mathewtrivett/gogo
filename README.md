@@ -41,9 +41,9 @@ Players take it in turns to place stones on the points made by intersecting line
 
 #### Controls
 
-![Move Cursor Controls]("./README_IMG/Move_Cursor_controls.png" "Move controls")
+![Move Cursor Controls](/README_IMG/Move_Cursor_controls.png "Move controls")
 
-![Place Stone Controls]("./README_IMG/Place_Stone_controls.png" "Place controls")
+![Place Stone Controls](/README_IMG/Place_Stone_controls.png "Place controls")
 
 
 #### Liberties
