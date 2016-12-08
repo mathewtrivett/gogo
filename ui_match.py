@@ -7,6 +7,7 @@ from ui_element import UIElement
 from ui_player import UIPlayer
 from ui_timer import UITimer
 from ui_stones import UIStones
+from ui_cursor import UICursor
 
 
 
@@ -91,6 +92,8 @@ class UIMatch():
         self.board.update()
         self.stones.setStones(stoneMatrix)
         self.stones.update()
+        cursor = UICursor(self.board,self.screen, self.QUIT_BUTTON_COLOUR)
+        cursor.draw()
             
         pygame.display.update()
 
