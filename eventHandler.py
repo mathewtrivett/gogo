@@ -6,13 +6,6 @@ class EventHandler():
         self.DECREMENTCLOCK = pygame.USEREVENT+1
         pygame.time.set_timer(self.DECREMENTCLOCK, 1000)
         self.update()
-        pygame.init()
-        pygame.display.set_mode((100, 100))
-        while True:
-            keysPressed = pygame.key.get_pressed()
-            print(keysPressed)
-            if keysPressed[pygame.K_a]:
-                print(a)
 
     def update(self):
         self.events = pygame.event.get()

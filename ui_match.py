@@ -99,7 +99,7 @@ class UIMatch():
         self.blackPlayer.update()
         self.whitePlayer.update()
         self.board.update()
-        self.winScreen.update()
+        #self.winScreen.update()
         self.stones.setStones(stoneMatrix)
         self.stones.update()
         self.cursor.coordinates = cursorPos
