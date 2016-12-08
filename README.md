@@ -62,6 +62,7 @@ You can resign, handing the win to your opponent.
 
 At the end of the game...
 
+
 #### Suicide
 
 You can't play a stone on a point that would leave your group with no liberties.  That would be SUICIDE!!!  Although....you can play this move if it would immediately take the liberties of your opponents.
