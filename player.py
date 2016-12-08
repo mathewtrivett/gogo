@@ -23,7 +23,8 @@ class Player:
             newBoard.addToGroups(newGroup)
             #merge with friendly groups
             for neighbour in newBoard.neighbours(coordinate):
-                if newBoard.getGroup(neighbour).colour == self.colour:
+                if newBoard.getGroup(neighbour).colour == self.colour and\
+                    newBoard.getGroup(neighbour) != newGroup:
                     newGroup.mergeGroup(newBoard.getGroup(neighbour),newBoard)
             #evaluate captures
             for neighbour in newBoard.neighbours(coordinate):
