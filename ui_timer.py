@@ -1,17 +1,17 @@
 import pygame
-from element import Element
+from ui_element import UIElement
 
-class Timer(Element):
+class UITimer(UIElement):
 
-    def __init__(self,screen, parent, align,left,top,
+    def __init__(self,screen, parent,
                  text, font, BASELINEGRID, fontSizeRelative,
                  bgColour,contrastColour,
-                 widthDecimalPercent,heightDecimalPercent):
+                 widthDecimalPercent,heightDecimalPercent,left,top):
 
-        super(Timer,self).__init__(screen, parent, align,left,top,
+        super(UITimer,self).__init__(screen, parent,
                                  text, font, BASELINEGRID, fontSizeRelative,
                                  bgColour,contrastColour,
-                                 widthDecimalPercent,heightDecimalPercent)
+                                 widthDecimalPercent,heightDecimalPercent,left,top)
         
     def update(self,ticks):
         self.text = ticks

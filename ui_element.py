@@ -1,17 +1,16 @@
 import pygame
 
-class Element():
-    def __init__(self, screen, parent, align, left,top,
+class UIElement():
+    def __init__(self, screen, parent,
                  text, font, BASELINEGRID, fontSizeRelative,
                  bgColour,contrastColour,
-                 widthDecimalPercent,heightDecimalPercent):
+                 widthDecimalPercent,heightDecimalPercent,left=0,top=0):
         self.screen = screen
         self.parent = parent
         if type(self.parent) == pygame.Surface:
             self.parentSize = self.parent.get_rect()
         else:
             self.parentSize = self.parent.rect
-        self.align = align
         self.text = text
         self.font = font
         self.BASELINE_GRID = BASELINEGRID
@@ -22,20 +21,8 @@ class Element():
         self.heightDecimalPercent = heightDecimalPercent
         self.width = int(self.parentSize.width * self.widthDecimalPercent)
         self.height = int(self.parentSize.height * self.heightDecimalPercent)
-        self.x = left
-        self.y = top
-        if self.align == 'topleft':
-            self.x, self.y = self.parentSize.topleft
-        if self.align == 'topright':
-             self.x, self.y = (self.parentSize.topright[0] - self.width,self.parentSize.topright[1])
-        if self.align == 'bottomleft':
-             self.x, self.y = (self.parentSize.bottomleft[0],self.parentSize.bottomleft[0]-self.height)
-        if self.align == 'bottomright':
-             self.x, self.y = (self.parentSize.bottomright[0] - self.width,self.parentSize.bottomright[1])
-        else:
-            self.x = self.x
-            self.y = self.y
-
+        self.x = (self.parentSize.width * left) + self.parentSize.x
+        self.y = (self.parentSize.height * top) + self.parentSize.y 
         self.rect = pygame.Rect(
                     self.x,self.y,
                     self.width,self.height)

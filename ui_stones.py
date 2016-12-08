@@ -1,17 +1,17 @@
 import pygame
 import pygame.gfxdraw
-from element import Element
-from stone import Stone
+from ui_element import UIElement
+from ui_stone import UIStone
 
-class Stones(Element):
+class UIStones(UIElement):
     
     def __init__(self, stoneMatrix
-                 ,screen, parent, align,
+                 ,screen, parent,
                 text,font,BASELINEGRID,fontSizeRelative,
                 bgColour,contrastColour,
                 widthDecimalPercent,heightDecimalPercent, board):
         
-        super(Stones, self).__init__(screen, parent, align,
+        super(UIStones, self).__init__(screen, parent,
                                      text,font,BASELINEGRID,fontSizeRelative,
                                      bgColour,contrastColour,
                                      widthDecimalPercent,heightDecimalPercent)
@@ -26,8 +26,8 @@ class Stones(Element):
     def setStones(self,stoneMatrix):
         self.whiteStones = []
         self.blackStones = []
-        for (x,row) in enumerate(stoneMatrix):
-            for (y,stone) in enumerate(row):
+        for (y,row) in enumerate(stoneMatrix):
+            for (x,stone) in enumerate(row):
                 if stone == "B":
                     self.blackStones.append((x,y))
                 elif stone == "W":
@@ -35,11 +35,11 @@ class Stones(Element):
                     
     def update(self):
         for (x,y) in self.whiteStones:
-            stone = Stone(self.board, self.whiteColour, self.screen)
+            stone = UIStone(self.board, self.whiteColour, self.screen)
             stone.coordinates = (x,y)
             stone.draw()
         for (x,y) in self.blackStones:
-            stone = Stone(self.board, self.blackColour, self.screen)
+            stone = UIStone(self.board, self.blackColour, self.screen)
             stone.coordinates = (x,y)
             stone.draw()
         

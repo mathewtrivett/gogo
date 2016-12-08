@@ -1,20 +1,20 @@
 import pygame
 import pygame.gfxdraw
-from stone import Stone
-from button import Button
-from gameboard import GameBoard
-from element import Element
-from player_ui import Player
-from timer import Timer
-from stones import Stones
+from ui_stone import UIStone
+from ui_button import UIButton
+from ui_gameboard import UIGameBoard
+from ui_element import UIElement
+from ui_player import UIPlayer
+from ui_timer import UITimer
+from ui_stones import UIStones
+from ui_cursor import UICursor
 
 
-
-
-class MatchUI():
+class UIMatch():
     
-    def __init__(self):
+    def __init__(self,boardSize):
 
+        self.boardSize = boardSize
 
         self.WIDTH = 1024
         self.HEIGHT = 768
@@ -42,41 +42,55 @@ class MatchUI():
         self.screen = pygame.display.set_mode([self.WIDTH,self.HEIGHT])
         pygame.display.set_caption("GoGo")
         
-        
         #Create the players sidebars
-        self.blackPlayer = Player(self.screen,self.screen,'topleft',
+        self.blackPlayer = UIPlayer(self.screen,self.screen,
                 'Black',self.FONT,self.BASELINE_GRID,self.FONTSIZE,
                 self.BLACKSTONE,self.WHITESTONE,
                 0.2,1,True,self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
                     self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
-                    self.BUTTON_FONT_COLOUR)
+                    self.BUTTON_FONT_COLOUR,0,0)
         
-        self.whitePlayer = Player(self.screen,self.screen,'topright',
+        self.whitePlayer = UIPlayer(self.screen,self.screen,
                 'White',self.FONT,self.BASELINE_GRID,self.FONTSIZE,
                 self.WHITESTONE,self.BLACKSTONE,
                 0.2,1,False,self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
                     self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
-                    self.BUTTON_FONT_COLOUR)
+                    self.BUTTON_FONT_COLOUR,0.8,0)
         
-        self.board = GameBoard(9,0.6,self.LINECOLOUR,1,self.BOARDCOLOUR,self.screen)
-        self.stones = Stones([["B"],["W"]], self.screen, self.board,'topleft',
+        self.board = UIGameBoard(self.screen,self.screen,"",self.FONT,
+                                 self.BASELINE_GRID, self.FONTSIZE,
+                                 self.BOARDCOLOUR,self.LINECOLOUR,
+                                 0.6,self.WIDTH/self.HEIGHT*0.6,
+                                 self.boardSize, 1, 0.2, 0.06)
+        
+        self.stones = UIStones([["B"],["W"]], self.screen, self.board,
                              '',self.FONT, self.BASELINE_GRID, self.FONTSIZE,
                              self.WHITESTONE, self.BLACKSTONE,1,1,self.board)
         
-    def update(self):
-        self.screen.fill(self.BOARDCOLOUR)
+    def update(self, stoneMatrix, activePlayer, blackTime, whiteTime):
+        whiteTimeStr = "{} : {}".format(whiteTime//60,whiteTime%60)
+        self.whitePlayer.timer.update(whiteTimeStr)
+        blackTimeStr = "{} : {}".format(blackTime//60,blackTime%60)
+        self.blackPlayer.timer.update(blackTimeStr)
+
+        if activePlayer == 0:
+            self.blackPlayer.isActive = True
+            self.whitePlayer.isActive = False
+        elif activePlayer == 1:
+            self.blackPlayer.isActive = False
+            self.whitePlayer.isActive = True
         
-    
+        self.screen.fill(self.BOARDCOLOUR)
         self.blackPlayer.update()
         self.whitePlayer.update()
-        board = GameBoard(9,0.6,self.LINECOLOUR,1,self.BOARDCOLOUR,self.screen)
-        
+        self.board.update()
+        self.stones.setStones(stoneMatrix)
         self.stones.update()
-        while True:
+        cursor = UICursor(self.board,self.screen, self.QUIT_BUTTON_COLOUR)
+        cursor.draw()
             
-            event = pygame.event.poll()
-            pygame.display.update()
-    
-            if event.type == pygame.QUIT :
-                break   
+        pygame.display.update()
+
+
+    def quit(self):
         pygame.quit()

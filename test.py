@@ -1,4 +1,5 @@
-from matchUI import MatchUI
+from ui_match import UIMatch
+from match import Match
 
-m = MatchUI()
-m.update()
+match = Match(9)
+match.matchLoop()
