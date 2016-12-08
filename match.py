@@ -8,7 +8,8 @@ class Match:
         self.previousBoard = self.board.getMatrix()
         self.currentBoard = self.board.getMatrix()
         self.UI = UIMatch(size)
-    
+        self.cursor = Cursor(self.board)
+        
     '''
     Evaulates one turn, the return value indictates if the match should end
     '''
@@ -51,7 +52,8 @@ class Match:
         lastTurnPassed = False
         while(not end):
             self.UI.update(self.currentBoard, self.currentPlayer,
-                           self.players[0].time,self.players[1].time)
+                           self.players[0].time,self.players[1].time,
+                           self.cursor.coordinates)
             move = self.playTurn()
             if move == "passed":
                 if lastTurnPassed == True:
@@ -120,6 +122,24 @@ class Match:
                     else:
                         group.colour = "n"
 
+    '''
+    Looks for any of the allowed inputs to any resolves the relvent action
+    '''
+    def lookForInput(self):
+        inp = Inputs()
+        if inp.hasQuit():
+            self.UI.quit()
+        if inp.keyWasPressed(pygame.K_LEFT):
+            self.cursor.moveBy((-1,0))
+        if inp.keyWasPressed(pygame.K_RIGHT):
+            self.cursor.moveBy((1,0))
+        if inp.keyWasPressed(pygame.K_UP):
+            self.cursor.moveBy((0,-1))
+        if inp.keyWasPressed(pygame.K_DOWN):
+            self.cursor.moveBy((0,1))
+            
+from cursor import Cursor
+from inputs import Inputs
 from board import Board
 from player import Player
 from group import Group

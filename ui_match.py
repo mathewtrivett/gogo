@@ -13,7 +13,6 @@ from ui_cursor import UICursor
 class UIMatch():
     
     def __init__(self,boardSize):
-
         self.boardSize = boardSize
 
         self.WIDTH = 1024
@@ -27,7 +26,9 @@ class UIMatch():
         self.WHITESTONE = pygame.color.THECOLORS['antiquewhite1']
         self.BLACKSTONE = pygame.color.THECOLORS['grey10']
         self.PASS_BUTTON_COLOUR = pygame.color.THECOLORS['aquamarine3']
+        self.PASS_BUTTON_HOVER_COLOUR = pygame.color.Color(102, 205, 170, 128)
         self.QUIT_BUTTON_COLOUR = pygame.color.Color(233, 80, 80, 255)
+        self.QUIT_BUTTON_HOVER_COLOUR = pygame.color.Color(233, 80, 80, 128)
         self.BUTTON_FONT_COLOUR = pygame.color.THECOLORS['black']
 
 
@@ -46,15 +47,15 @@ class UIMatch():
         self.blackPlayer = UIPlayer(self.screen,self.screen,
                 'Black',self.FONT,self.BASELINE_GRID,self.FONTSIZE,
                 self.BLACKSTONE,self.WHITESTONE,
-                0.2,1,True,self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
-                    self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
+                0.2,1,True, self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
+                    self.PASS_BUTTON_COLOUR, self.PASS_BUTTON_HOVER_COLOUR, self.QUIT_BUTTON_COLOUR, self.QUIT_BUTTON_HOVER_COLOUR,
                     self.BUTTON_FONT_COLOUR,0,0)
         
         self.whitePlayer = UIPlayer(self.screen,self.screen,
                 'White',self.FONT,self.BASELINE_GRID,self.FONTSIZE,
                 self.WHITESTONE,self.BLACKSTONE,
                 0.2,1,False,self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
-                    self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
+                    self.PASS_BUTTON_COLOUR, self.PASS_BUTTON_HOVER_COLOUR,self.QUIT_BUTTON_COLOUR,self.QUIT_BUTTON_HOVER_COLOUR,
                     self.BUTTON_FONT_COLOUR,0.8,0)
         
         self.board = UIGameBoard(self.screen,self.screen,"",self.FONT,
@@ -67,7 +68,9 @@ class UIMatch():
                              '',self.FONT, self.BASELINE_GRID, self.FONTSIZE,
                              self.WHITESTONE, self.BLACKSTONE,1,1,self.board)
         
-    def update(self, stoneMatrix, activePlayer, blackTime, whiteTime):
+        self.cursor = UICursor(self.board,self.screen, self.QUIT_BUTTON_COLOUR)
+        
+    def update(self, stoneMatrix, activePlayer, blackTime, whiteTime, cursorPos):
         whiteTimeStr = "{} : {}".format(whiteTime//60,whiteTime%60)
         self.whitePlayer.timer.update(whiteTimeStr)
         blackTimeStr = "{} : {}".format(blackTime//60,blackTime%60)
@@ -86,9 +89,8 @@ class UIMatch():
         self.board.update()
         self.stones.setStones(stoneMatrix)
         self.stones.update()
-        cursor = UICursor(self.board,self.screen, self.QUIT_BUTTON_COLOUR)
-        cursor.draw()
-            
+        self.cursor.coordinates = cursorPos
+        self.cursor.draw()
         pygame.display.update()
 
 
