@@ -2,17 +2,16 @@ import pygame
 from element import Element
 
 class Button(Element):
-    def __init__(self,screen,parent,align,
+    def __init__(self,screen,parent,align,left,top,
                  text, font,BASELINEGRID,fontSizeRelative, 
                  bgColour,contrastColour,
                  widthDecimalPercent,heightDecimalPercent,
                  action):
 
-        super(Button, self).__init__(screen, parent, align,
+        super(Button, self).__init__(screen, parent, align,left,top,
                                      text,font,BASELINEGRID,fontSizeRelative,
                                      bgColour,contrastColour,
-                                     widthDecimalPercent,heightDecimalPercent
-                                     )
+                                     widthDecimalPercent,heightDecimalPercent)
         self.action = action
         
     def onHover(self):

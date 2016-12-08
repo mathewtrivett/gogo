@@ -3,12 +3,12 @@ from element import Element
 
 class Timer(Element):
 
-    def __init__(self,screen, parent, align,
+    def __init__(self,screen, parent, align,left,top,
                  text, font, BASELINEGRID, fontSizeRelative,
                  bgColour,contrastColour,
                  widthDecimalPercent,heightDecimalPercent):
 
-        super(Timer,self).__init__(screen, parent, align,
+        super(Timer,self).__init__(screen, parent, align,left,top,
                                  text, font, BASELINEGRID, fontSizeRelative,
                                  bgColour,contrastColour,
                                  widthDecimalPercent,heightDecimalPercent)

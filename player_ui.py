@@ -5,7 +5,7 @@ from button import Button
 
 class Player(Element):
     
-    def __init__(self, screen, parent, align,
+    def __init__(self, screen, parent, align,left,top,
                  text, font, BASELINEGRID, fontSizeRelative,
                  bgColour,contrastColour,
                  widthDecimalPercent,heightDecimalPercent,
@@ -13,23 +13,23 @@ class Player(Element):
                     PASS_BUTTON_COLOUR, QUIT_BUTTON_COLOUR,
                     BUTTON_FONT_COLOUR):
 
-        super(Player, self).__init__(screen, parent, align,
+        super(Player, self).__init__(screen, parent, align,left,top,
                                      text, font, BASELINEGRID, fontSizeRelative,
                                      bgColour,contrastColour,
                                      widthDecimalPercent,heightDecimalPercent)
         self.isActive = isActive
 
-        self.timer = Timer(screen,self,'topleft',
+        self.timer = Timer(screen,self,'topleft',left,top,
               "3:00",font,BASELINEGRID,TIMER_FONTSIZE,
               bgColour,contrastColour,
               1,0.2)
         
-        self.quitButton = Button(screen,self,'topleft',
+        self.quitButton = Button(screen,self,'topleft',left,top,
                     'Pass',font,BASELINEGRID,BUTTON_FONTSIZE,
                     PASS_BUTTON_COLOUR,BUTTON_FONT_COLOUR,
                     0.5,0.06,"Pass")
 
-        self.passButton = Button(screen,self,'topleft',
+        self.passButton = Button(screen,self,'topleft',left,top,
                     'Pass',font,BASELINEGRID,BUTTON_FONTSIZE,
                     PASS_BUTTON_COLOUR,BUTTON_FONT_COLOUR,
                     0.5,0.06,"Pass")

@@ -6,16 +6,11 @@ from gameboard import GameBoard
 from element import Element
 from player_ui import Player
 from timer import Timer
-
-
-
-
+from gameboard import GameBoard
 
 class MatchUI():
     
     def __init__(self):
-
-
         self.WIDTH = 1024
         self.HEIGHT = 768
         self.FRAMERATE = 60
@@ -43,31 +38,31 @@ class MatchUI():
         pygame.display.set_caption("GoGo")
         
         
-## Black's UI Elements
-        self.black = Player(self.screen,self.screen,'topleft',
+        ## Black's UI Elements
+        self.black = Player(self.screen,self.screen,'topleft',0,0,
                 'Black',self.FONT,self.BASELINE_GRID,self.FONTSIZE,
                 self.BLACKSTONE,self.WHITESTONE,
                 0.2,1,True,self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
                     self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
                     self.BUTTON_FONT_COLOUR)
         
-        self.white = Player(self.screen,self.screen,'topright',
+        self.white = Player(self.screen,self.screen,'topright',0,0,
                 'White',self.FONT,self.BASELINE_GRID,self.FONTSIZE,
                 self.WHITESTONE,self.BLACKSTONE,
                 0.2,1,False,self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
-                    self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
-                    self.BUTTON_FONT_COLOUR)
+                self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
+                self.BUTTON_FONT_COLOUR)
+
+        self.board = GameBoard(self.screen,self.screen,'',0.2,0.06, 
+                                "",self.FONT,self.BASELINE_GRID,self.FONTSIZE,
+                                self.BOARDCOLOUR, self.BLACKSTONE, ## has whitestone for now
+                                0.6,(self.WIDTH/self.HEIGHT)*0.6,9,1)
         
     def update(self):
         self.screen.fill(self.BOARDCOLOUR)
-        
-    
+        self.board.update()
         self.black.update()
-
-
         self.white.update()
-        
-        board = GameBoard(9,0.6,self.LINECOLOUR,1,self.BOARDCOLOUR,self.screen)
         
         while True:
             
