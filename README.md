@@ -52,7 +52,7 @@ Players take it in turns to place stones on the points made by intersecting line
 
 #### Liberties
 
-The lines on the board are called liberties.  Think of liberties as the life lines to each group of stones.  When a group of your stones are surrounded by your opponent, that group no longer has liberties and they are taken as prisoners.
+The lines on the board are called liberties.  Think of liberties as the life lines to each group of stones.  When a group of your stones is surrounded by your opponent, that group no longer has liberties and they are taken as prisoners.
 
 
 #### Winning GoGo
