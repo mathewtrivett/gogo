@@ -1,6 +1,6 @@
 import pygame
 from ui_element import UIElement
-from ui_timer import UITimer
+from ui_text import UIText
 from ui_button import UIButton
 
 class UIPlayer(UIElement):
@@ -20,10 +20,15 @@ class UIPlayer(UIElement):
         
         self.isActive = isActive
 
-        self.timer = UITimer(screen,self,
+        self.timer = UIText(screen,self,
               "3:00",font,BASELINEGRID,TIMER_FONTSIZE,
               bgColour,contrastColour,
               1,0.2,0,0)
+        
+        self.prisoners = UIText(screen,self,
+                    "Prisoners = 5",font, BASELINEGRID,BUTTON_FONTSIZE,
+                    bgColour, contrastColour,
+                1,0.05,0,0.3)
         
         self.quitButton = UIButton(screen,self,
                     'Quit',font,BASELINEGRID,BUTTON_FONTSIZE,
@@ -55,3 +60,5 @@ class UIPlayer(UIElement):
         self.quitButton.positionText(0.5,0.5)
         self.passButton.draw()
         self.passButton.positionText(0.5,0.5)
+        self.prisoners.draw()
+        self.prisoners.positionText(0.5,0)

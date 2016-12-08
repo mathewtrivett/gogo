@@ -5,7 +5,6 @@ from ui_button import UIButton
 from ui_gameboard import UIGameBoard
 from ui_element import UIElement
 from ui_player import UIPlayer
-from ui_timer import UITimer
 from ui_stones import UIStones
 from ui_cursor import UICursor
 from ui_message import UIMessage
@@ -82,11 +81,17 @@ class UIMatch():
                                   None, 0.1,0.15)
     
 
-    def update(self, stoneMatrix, activePlayer, blackTime, whiteTime, cursorPos):
+    def update(self, stoneMatrix, activePlayer, blackTime,
+               whiteTime, blackPrisoners,whitePrisoners, cursorPos):
         whiteTimeStr = "{} : {:02d}".format(whiteTime//60,whiteTime%60)
         self.whitePlayer.timer.update(whiteTimeStr)
         blackTimeStr = "{} : {:02d}".format(blackTime//60,blackTime%60)
         self.blackPlayer.timer.update(blackTimeStr)
+        whitePrisonersStr = "Prisoners = {}".format(whitePrisoners)
+        self.whitePlayer.prisoners.update(whitePrisonersStr)
+        blackPrisonersStr = "Prisoners = {}".format(blackPrisoners)
+        self.blackPlayer.prisoners.update(blackPrisonersStr)
+        
 
         if activePlayer == 0:
             self.blackPlayer.isActive = True

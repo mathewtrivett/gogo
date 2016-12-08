@@ -26,6 +26,7 @@ class Match:
             self.lookForInput()
             self.UI.update(self.currentBoard, self.currentPlayer,
                            self.players[0].time,self.players[1].time,
+                           self.players[0].prisoners,self.players[1].prisoners,
                            self.cursor.coordinates)
             if self.players[self.currentPlayer].passed == True:
                 break
@@ -46,6 +47,7 @@ class Match:
     def matchLoop(self):
         self.UI.update(self.currentBoard, self.currentPlayer,
                         self.players[0].time,self.players[1].time,
+                           self.players[0].prisoners,self.players[1].prisoners,
                         self.cursor.coordinates)
         end = False
         lastTurnPassed = False
@@ -107,7 +109,8 @@ class Match:
     '''
     def lookForInput(self):
         self.handler.update()
-        self.players[self.currentPlayer].time -= self.handler.getTimePassed()
+        if self.players[self.currentPlayer].time > 0:
+            self.players[self.currentPlayer].time -= self.handler.getTimePassed()
         if self.handler.hasQuit():
             self.UI.quit()
         if self.handler.keyWasPressed(pygame.K_SPACE):
