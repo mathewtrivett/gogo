@@ -1,4 +1,5 @@
 from matchUI import MatchUI
+from match import Match
 
-m = MatchUI()
-m.update()
+match = Match()
+match.matchLoop()

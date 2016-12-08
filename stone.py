@@ -13,10 +13,6 @@ class Stone():
 
     def draw(self):
         center = self.board.getPixelPos(self.coordinates)
-        print(center)
-        print(self.radius)
-        print(self.colour)
-       # pygame.draw.circle(self.screen, self.colour,center,self.radius)
         
         self.rect = pygame.gfxdraw.aacircle(self.image,
                                 center[0],

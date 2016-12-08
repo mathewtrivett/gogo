@@ -7,6 +7,7 @@ class Match:
         self.territories = Board(size)
         self.previousBoard = self.board.getMatrix()
         self.currentBoard = self.board.getMatrix()
+        self.UI = MatchUI(size)
     
     '''
     Evaulates one turn, the return value indictates if the match should end
@@ -49,6 +50,8 @@ class Match:
         end = False
         lastTurnPassed = False
         while(not end):
+            self.UI.update(self.currentBoard, self.currentPlayer,
+                           self.players[0].time,self.players[1].time)
             move = self.playTurn()
             if move == "passed":
                 if lastTurnPassed == True:
@@ -68,13 +71,12 @@ class Match:
                 end = True
             elif move == "placedStone":
                 lastTurnPassed = False
-        print("Territory:\n"+str(self.territories))
-        print("Board:\n"+str(self.board))
         winnerstr  = ""
         for winner in winners:
             winnerstr = winnerstr + winner.colour + "  with "\
                 + str(self.findScore(player)) + ", "
         print("winner is " + winnerstr)
+        self.UI.quit()
 
     '''
     Gives the current score of a player
@@ -122,3 +124,4 @@ from board import Board
 from player import Player
 from group import Group
 import pygame
+from matchUI import MatchUI

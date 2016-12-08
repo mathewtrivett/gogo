@@ -26,8 +26,8 @@ class Stones(Element):
     def setStones(self,stoneMatrix):
         self.whiteStones = []
         self.blackStones = []
-        for (x,row) in enumerate(stoneMatrix):
-            for (y,stone) in enumerate(row):
+        for (y,row) in enumerate(stoneMatrix):
+            for (x,stone) in enumerate(row):
                 if stone == "B":
                     self.blackStones.append((x,y))
                 elif stone == "W":

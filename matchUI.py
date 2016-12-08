@@ -13,8 +13,9 @@ from stones import Stones
 
 class MatchUI():
     
-    def __init__(self):
+    def __init__(self,boardSize):
 
+        self.boardSize = boardSize
 
         self.WIDTH = 1024
         self.HEIGHT = 768
@@ -63,20 +64,31 @@ class MatchUI():
                              '',self.FONT, self.BASELINE_GRID, self.FONTSIZE,
                              self.WHITESTONE, self.BLACKSTONE,1,1,self.board)
         
-    def update(self):
-        self.screen.fill(self.BOARDCOLOUR)
+    def update(self, stoneMatrix, activePlayer, blackTime, whiteTime):
+        whiteTimeStr = "{} : {}".format(whiteTime//60,whiteTime%60)
+        self.whitePlayer.timer.update(whiteTimeStr)
+        blackTimeStr = "{} : {}".format(blackTime//60,blackTime%60)
+        self.blackPlayer.timer.update(blackTimeStr)
+
+        if activePlayer == 0:
+            self.blackPlayer.isActive = True
+            self.whitePlayer.isActive = False
+        elif activePlayer == 1:
+            self.blackPlayer.isActive = False
+            self.whitePlayer.isActive = True
         
-    
+        
+        
+        
+        self.screen.fill(self.BOARDCOLOUR)
         self.blackPlayer.update()
         self.whitePlayer.update()
-        board = GameBoard(9,0.6,self.LINECOLOUR,1,self.BOARDCOLOUR,self.screen)
-        
+        board = GameBoard(self.boardSize,0.6,self.LINECOLOUR,1,self.BOARDCOLOUR,self.screen)
+        self.stones.setStones(stoneMatrix)
         self.stones.update()
-        while True:
             
-            event = pygame.event.poll()
-            pygame.display.update()
-    
-            if event.type == pygame.QUIT :
-                break   
+        pygame.display.update()
+
+
+    def quit(self):
         pygame.quit()
