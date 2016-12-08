@@ -6,11 +6,16 @@ from gameboard import GameBoard
 from element import Element
 from player_ui import Player
 from timer import Timer
-from gameboard import GameBoard
+from stones import Stones
+
+
+
 
 class MatchUI():
     
     def __init__(self):
+
+
         self.WIDTH = 1024
         self.HEIGHT = 768
         self.FRAMERATE = 60
@@ -32,41 +37,43 @@ class MatchUI():
         self.TIMER_FONTSIZE = 4.2
         self.BUTTON_FONTSIZE = 1.6
 
-        ## SETUP Pygame Environment
+        #Set Up Pygame Environment
         pygame.init()
         self.screen = pygame.display.set_mode([self.WIDTH,self.HEIGHT])
         pygame.display.set_caption("GoGo")
         
         
-        ## Black's UI Elements
-        self.black = Player(self.screen,self.screen,'topleft',0,0,
+        #Create the players sidebars
+        self.blackPlayer = Player(self.screen,self.screen,'topleft',
                 'Black',self.FONT,self.BASELINE_GRID,self.FONTSIZE,
                 self.BLACKSTONE,self.WHITESTONE,
                 0.2,1,True,self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
                     self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
                     self.BUTTON_FONT_COLOUR)
         
-        self.white = Player(self.screen,self.screen,'topright',0,0,
+        self.whitePlayer = Player(self.screen,self.screen,'topright',
                 'White',self.FONT,self.BASELINE_GRID,self.FONTSIZE,
                 self.WHITESTONE,self.BLACKSTONE,
                 0.2,1,False,self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
-                self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
-                self.BUTTON_FONT_COLOUR)
-
-        self.board = GameBoard(self.screen,self.screen,'',0.2,0.06, 
-                                "",self.FONT,self.BASELINE_GRID,self.FONTSIZE,
-                                self.BOARDCOLOUR, self.BLACKSTONE, ## has whitestone for now
-                                0.6,(self.WIDTH/self.HEIGHT)*0.6,9,1)
+                    self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
+                    self.BUTTON_FONT_COLOUR)
+        
+        self.board = GameBoard(9,0.6,self.LINECOLOUR,1,self.BOARDCOLOUR,self.screen)
+        self.stones = Stones([["B"],["W"]], self.screen, self.board,'topleft',
+                             '',self.FONT, self.BASELINE_GRID, self.FONTSIZE,
+                             self.WHITESTONE, self.BLACKSTONE,1,1,self.board)
         
     def update(self):
         self.screen.fill(self.BOARDCOLOUR)
-        self.board.update()
-        self.black.update()
-        self.white.update()
         
+    
+        self.blackPlayer.update()
+        self.whitePlayer.update()
+        board = GameBoard(9,0.6,self.LINECOLOUR,1,self.BOARDCOLOUR,self.screen)
+        
+        self.stones.update()
         while True:
             
-            pygame.display.flip()
             event = pygame.event.poll()
             pygame.display.update()
     
