@@ -10,7 +10,7 @@ class UIPlayer(UIElement):
                  bgColour,contrastColour,
                  widthDecimalPercent,heightDecimalPercent,
                  isActive,TIMER_FONTSIZE,BUTTON_FONTSIZE,
-                    PASS_BUTTON_COLOUR, QUIT_BUTTON_COLOUR,
+                    PASS_BUTTON_COLOUR, PASS_BUTTON_HOVER_COLOUR, QUIT_BUTTON_COLOUR, QUIT_BUTTON_HOVER_COLOUR,
                     BUTTON_FONT_COLOUR,left, top):
 
         super(UIPlayer, self).__init__(screen, parent,
@@ -26,12 +26,12 @@ class UIPlayer(UIElement):
         
         self.quitButton = UIButton(screen,self,
                     'Quit',font,BASELINEGRID,BUTTON_FONTSIZE,
-                    QUIT_BUTTON_COLOUR,BUTTON_FONT_COLOUR,
+                    QUIT_BUTTON_COLOUR,BUTTON_FONT_COLOUR,QUIT_BUTTON_HOVER_COLOUR,
                     0.5,0.06,"Quit",0.5,0)
 
         self.passButton = UIButton(screen,self,
                     'Pass',font,BASELINEGRID,BUTTON_FONTSIZE,
-                    PASS_BUTTON_COLOUR,BUTTON_FONT_COLOUR,
+                    PASS_BUTTON_COLOUR,BUTTON_FONT_COLOUR,PASS_BUTTON_HOVER_COLOUR,
                     0.5,0.06,"Pass",0,0)
 
     def drawActivePlayerBorder(self,padding):
