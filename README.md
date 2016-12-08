@@ -1,5 +1,6 @@
 # GoGo
 
+Go is a classic turn based strategy game for two players.  Your goal is to surround your opponent, claiming territory and taking prisoners.
 
 ## Download
 
@@ -15,10 +16,10 @@ To play GoGo:
 
 ## Install Dependencies
 
-[Python3](https://www.python.org/downloads/) - GoGo will only work with Python3.x to make sure you have Python 3 installed run:
-`python3 --version`
+[Python3](https://www.python.org/downloads/) - GoGo will only work with Python3.x. To make sure you have Python 3 installed run:
+`python3 --version`.  If you don't have Python3, install it by visiting [Python3](https://www.python.org/downloads/) and follow the instructions there.
 
-[PyGame](http://www.pygame.org/hifi.html) - To make sure your pygame installation is compatible with Python 3 run:
+[PyGame](http://www.pygame.org/hifi.html) - Make sure your pygame installation is compatible with Python 3 run:
 `pip3 install pygame`
 
 [DotMap](https://github.com/drgrib/dotmap) - Allows for dot notation access of a dict object.
@@ -32,14 +33,10 @@ To play GoGo:
 
 ## Playing Gogo
 
-#### Go
-
-Go is a classic turn based strategy game for two players.  Your goal is to surround your opponent, claiming territory and taking prisoners.
-
 
 #### Placing Stones
 
-Players take it in turns to place stones on the points made by intersecting lines on the board.  When two or more of your stones connect vertically or horizontally, they become part of a group.  A group behaves in the same way as a single stone and so must be completely surrounded to be taken.  Stones of the same colour diagonal to each other are not part of a group.
+Players take it in turns to place stones on the points made by intersecting lines on the board.  When two or more of your stones immediately connect vertically or horizontally, they become part of a group. Groups behave in the same way as a single stone and so must be completely surrounded to be captured.  Stones of the same colour diagonal to each other are not part of a group.
 
 
 #### Liberties
@@ -67,7 +64,7 @@ At the end of the game...
 
 #### Suicide
 
-You can't play a stone on a point that would leave that group with no liberties.  That would be SUICIDE!!!  Although you can play this move if it means that your opponent would lose their liberties.
+You can't play a stone on a point that would leave your group with no liberties.  That would be SUICIDE!!!  Although....you can play this move if it would immediately take the liberties of your opponents.
 
 
 #### Ko
