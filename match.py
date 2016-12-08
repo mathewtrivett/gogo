@@ -27,10 +27,8 @@ class Match:
             self.UI.update(self.currentBoard, self.currentPlayer,
                            self.players[0].time,self.players[1].time,
                            self.cursor.coordinates)
-            print("a")
             if self.players[self.currentPlayer].passed == True:
                 break
-            print("b")
             if self.players[self.currentPlayer].resigned == True:
                 break
             if self.attemptedPlace == True:
