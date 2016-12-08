@@ -59,7 +59,12 @@ class UIMatch():
                     self.PASS_BUTTON_COLOUR, self.QUIT_BUTTON_COLOUR,
                     self.BUTTON_FONT_COLOUR)
         
-        self.board = UIGameBoard(9,0.6,self.LINECOLOUR,1,self.BOARDCOLOUR,self.screen)
+        self.board = UIGameBoard(self.screen,self.screen,"","",self.FONT,
+                                 self.BASELINE_GRID, self.FONTSIZE,
+                                 self.BOARDCOLOUR,self.LINECOLOUR,
+                                 0.6,self.WIDTH/self.HEIGHT*0.6,
+                                 self.boardSize, 1, 0.2, 0.06)
+        
         self.stones = UIStones([["B"],["W"]], self.screen, self.board,'topleft',
                              '',self.FONT, self.BASELINE_GRID, self.FONTSIZE,
                              self.WHITESTONE, self.BLACKSTONE,1,1,self.board)
@@ -83,7 +88,7 @@ class UIMatch():
         self.screen.fill(self.BOARDCOLOUR)
         self.blackPlayer.update()
         self.whitePlayer.update()
-        board = UIGameBoard(self.boardSize,0.6,self.LINECOLOUR,1,self.BOARDCOLOUR,self.screen)
+        self.board.update()
         self.stones.setStones(stoneMatrix)
         self.stones.update()
             

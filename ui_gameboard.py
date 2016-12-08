@@ -1,19 +1,19 @@
 import pygame
-from element import Element
+from ui_element import UIElement
 
-class UIGameBoard(Element):
-    def __init__(self, screen, parent, align,left,top,
+class UIGameBoard(UIElement):
+    def __init__(self, screen, parent, align,
                 text, font, BASELINEGRID, fontSizeRelative,
                 bgColour, contrastColour,
                 widthDecimalPercent, heightDecimalPercent,
-                boardSize, lineWidth):
-        super(GameBoard,self).__init__(screen, parent, align,left,top,
+                boardSize, lineWidth,left,top):
+        super(UIGameBoard,self).__init__(screen, parent, align,
                                     text, font, BASELINEGRID, fontSizeRelative,
                                     bgColour, contrastColour,
-                                    widthDecimalPercent, heightDecimalPercent)
+                                    widthDecimalPercent, heightDecimalPercent,left,top)
         
         # Backboard
-        self.boardSize = boardSize ## Board plus 1 as a way to build the iterator for lines
+        self.boardSize = boardSize + 1 ## Board plus 1 as a way to build the iterator for lines
         self.x = (self.parentSize.x + self.parentSize.width) * left
         self.y = (self.parentSize.y + self.parentSize.height) * top
         self.interval = self.width / self.boardSize # Board's background size by the divisor
@@ -28,8 +28,8 @@ class UIGameBoard(Element):
     def update(self):
         self.draw()
         for position in range(len(self.coordinates)):
-
             # Horizontal Lines
+            print(self.getPixelPos((0,position)))
             pygame.draw.line(self.screen,
                              self.contrastColour,
                             (self.getPixelPos((0,position))),
@@ -44,4 +44,4 @@ class UIGameBoard(Element):
                             self.lineWidth)
 
     def getPixelPos(self,coordinates):
-        return self.coordinates[1],self.coordinates[0]
+        return self.coordinates[coordinates[1]][coordinates[0]]
