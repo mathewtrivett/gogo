@@ -38,7 +38,7 @@ To play GoGo:
 
 ![Left Player's Move Cursor Controls](/README_IMG/arrows_move_cursor_controls.png "Left Player Arrows move controls")
 
-![Right Player's Move Cursor Controls](/README_IMG/wasd_move_cursor_controls.png "Right Player WASD move controls")
+![Right Player's Move Cursor Controls](/README_IMG/wasd_cursor_controls.png "Right Player WASD move controls")
 
 ##### Move your cursor around the board to select a point using the arrow keys.
 
