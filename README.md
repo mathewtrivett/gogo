@@ -43,8 +43,11 @@ Players take it in turns to place stones on the points made by intersecting line
 
 ![Move Cursor Controls](/README_IMG/Move_Cursor_controls.png "Move controls")
 
+##### Move your cursor around the board to select your point.
+
 ![Place Stone Controls](/README_IMG/Place_Stone_controls.png "Place controls")
 
+#####Press Spacebar to place a stone.
 
 #### Liberties
 
