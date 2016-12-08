@@ -17,6 +17,7 @@ class UIPlayer(UIElement):
                                      text, font, BASELINEGRID, fontSizeRelative,
                                      bgColour,contrastColour,
                                      widthDecimalPercent,heightDecimalPercent,left,top)
+        
         self.isActive = isActive
 
         self.timer = UITimer(screen,self,
