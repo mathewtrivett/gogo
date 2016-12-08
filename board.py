@@ -15,7 +15,7 @@ class Board:
         return state
 
     '''
-    A funtion which mutates one board into another
+    A method to mutate one board into another
     '''
 
     def setTo(self, newBoard):
