@@ -39,19 +39,19 @@ Go is a classic turn based strategy game for two players.  Your goal is to surro
 
 #### Placing Stones
 
-Players take it in turns to place stones on the points made by intersecting lines on the board.  When two or more of your stones connect either vertically or horizontally, they become part of a group.  A group essentially behaves in the same way as a single stone
+Players take it in turns to place stones on the points made by intersecting lines on the board.  When two or more of your stones connect vertically or horizontally, they become part of a group.  A group behaves in the same way as a single stone and so must be completely surrounded to be taken.  Stones of the same colour diagonal to each other are not part of a group.
 
 
 #### Liberties
 
-The lines on the board are called liberties.  You can think of liberties as life lines to each stone.  When a group of your stones are surrounded by your opponent, that group no longer has liberties and they are taken as prisoners.
+The lines on the board are called liberties.  Think of liberties as the life lines to each stone.  When a group of your stones are surrounded by your opponent, that group no longer has liberties and they are taken as prisoners.
 
 
 #### Winning GoGo
 
 + **Timeout**
 
-If a player runs out of time, they automatically lose.
+If you run out of time, you automatically lose.
 
 + **Pass**
 
@@ -59,24 +59,17 @@ Players can pass.  A consecutive pass from each player ends the game and the gam
 
 + **Resign**
 
-Players can resign, handing the win to their opponent.
-
+You can resign, handing the win to your opponent.
 
 #### Scoring
 
-
+At the end of the game...
 
 #### Suicide
 
-You can't play a stone on a point that would mean you immediately had no liberties.  That would be SUICIDE!!!  Although
+You can't play a stone on a point that would leave that group with no liberties.  That would be SUICIDE!!!  Although you can play this move if it means that your opponent would lose their liberties.
+
 
 #### Ko
-
-
-
-
-
-
-
 
 
