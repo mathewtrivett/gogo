@@ -13,7 +13,6 @@ from ui_cursor import UICursor
 class UIMatch():
     
     def __init__(self,boardSize):
-
         self.boardSize = boardSize
 
         self.WIDTH = 1024
