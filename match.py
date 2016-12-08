@@ -51,11 +51,13 @@ class Match:
         lastTurnPassed = False
         while(not end):
             self.playTurn()
+            '''
             if self.players.[currentPlayer].passed == True and\
                 self.players.[currentPlayer+1%len(self.players)].passed ==True:
                 #end game
             if self.players.[currentPlayer].resigned == True:
                 #also end game
+            '''
         self.UI.quit()
 
     '''
