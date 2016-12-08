@@ -54,9 +54,7 @@ class Match:
             self.UI.update(self.currentBoard, self.currentPlayer,
                            self.players[0].time,self.players[1].time,
                            self.cursor.coordinates)
-            move = "placedStone"#self.playTurn()
-            #print(self.cursor.coordinates)
-            self.lookForInput()
+            move = self.playTurn()
             if move == "passed":
                 if lastTurnPassed == True:
                     end = True
@@ -130,18 +128,14 @@ class Match:
     def lookForInput(self):
         inp = Inputs()
         if inp.hasQuit():
-            pygame.quit()
+            self.UI.quit()
         if inp.keyWasPressed(pygame.K_LEFT):
-            print("4")
             self.cursor.moveBy((-1,0))
         if inp.keyWasPressed(pygame.K_RIGHT):
-            print("3")
             self.cursor.moveBy((1,0))
         if inp.keyWasPressed(pygame.K_UP):
             self.cursor.moveBy((0,-1))
-            print("2")
         if inp.keyWasPressed(pygame.K_DOWN):
-            print("1")
             self.cursor.moveBy((0,1))
             
 from cursor import Cursor
