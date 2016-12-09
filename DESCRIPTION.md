@@ -12,7 +12,7 @@ Go is a classic turn based strategy game for two players.  Your goal is to surro
 
 ![Left Player Place Stone Controls](/README_IMG/space_place_stone_controls.png "Left Player Place controls")
 
-##### Press Enter to place your stone.
+##### Press Space to place your stone.
 
 ### White Player
 
