@@ -31,7 +31,7 @@ class UIPlayer(UIElement):
                 1,0.05,0,0.3)
         
         self.quitButton = UIButton(screen,self,
-                    'Quit',font,BASELINEGRID,BUTTON_FONTSIZE,
+                    'Resign',font,BASELINEGRID,BUTTON_FONTSIZE,
                     QUIT_BUTTON_COLOUR,BUTTON_FONT_COLOUR,QUIT_BUTTON_HOVER_COLOUR,
                     0.5,0.06,0.5,0,eventHandler)
 
