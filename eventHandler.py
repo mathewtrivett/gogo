@@ -5,14 +5,9 @@ class EventHandler():
     def __init__(self):
         self.DECREMENTCLOCK = pygame.USEREVENT+1
         pygame.time.set_timer(self.DECREMENTCLOCK, 1000)
-        self.update()
 
     def update(self):
         self.events = pygame.event.get()
-        
-    def keyIsDown(self,keyCode):
-        keysPressed = pygame.key.get_pressed()
-        return keysPressed[keyCode]
     
     def keyWasPressed(self,keyCode):
         for event in self.events:
@@ -31,5 +26,12 @@ class EventHandler():
     def hasQuit(self):
         for event in self.events:
             if event.type == pygame.QUIT:
+                return True
+        return False
+    
+    def leftClicked(self):
+        for event in self.events:
+            if event.type == pygame.MOUSEBUTTONDOWN and \
+                event.button == 1:
                 return True
         return False

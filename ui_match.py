@@ -8,12 +8,22 @@ from ui_player import UIPlayer
 from ui_stones import UIStones
 from ui_cursor import UICursor
 from ui_message import UIMessage
-
+'''
+        self.winScreen = UIMessage(self.screen, self.screen,
+                                  "{0} won. {1} wow what a score!!!".format("Black",345),self.FONT,self.BASELINE_GRID,self.MESSAGE_FONTSIZE,
+                                  pygame.color.Color(0,0,0,60),self.WHITESTONE,
+                                  0.8,0.7,
+                                  self.BUTTON_FONTSIZE, self.BUTTON_FONT_COLOUR,
+                                  self.PASS_BUTTON_COLOUR,self.PASS_BUTTON_HOVER_COLOUR,
+                                  "New Game","Play Again?",
+                                  None, 0.1,0.15)
+''' 
 
 class UIMatch():
     
-    def __init__(self,boardSize):
+    def __init__(self,boardSize, eventHandler):
         self.boardSize = boardSize
+        self.eventHandler = eventHandler
 
         self.WIDTH = 1024
         self.HEIGHT = 768
@@ -26,9 +36,9 @@ class UIMatch():
         self.WHITESTONE = pygame.color.THECOLORS['antiquewhite1']
         self.BLACKSTONE = pygame.color.THECOLORS['grey10']
         self.PASS_BUTTON_COLOUR = pygame.color.THECOLORS['aquamarine3']
-        self.PASS_BUTTON_HOVER_COLOUR = pygame.color.Color(102, 205, 170, 128)
+        self.PASS_BUTTON_HOVER_COLOUR = pygame.color.Color(82, 185, 150, 255)
         self.QUIT_BUTTON_COLOUR = pygame.color.Color(233, 80, 80, 255)
-        self.QUIT_BUTTON_HOVER_COLOUR = pygame.color.Color(233, 80, 80, 128)
+        self.QUIT_BUTTON_HOVER_COLOUR = pygame.color.Color(213, 60, 60, 255)
         self.BUTTON_FONT_COLOUR = pygame.color.THECOLORS['black']
 
 
@@ -50,14 +60,14 @@ class UIMatch():
                 self.BLACKSTONE,self.WHITESTONE,
                 0.2,1,True, self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
                     self.PASS_BUTTON_COLOUR, self.PASS_BUTTON_HOVER_COLOUR, self.QUIT_BUTTON_COLOUR, self.QUIT_BUTTON_HOVER_COLOUR,
-                    self.BUTTON_FONT_COLOUR,0,0)
+                    self.BUTTON_FONT_COLOUR,0,0,self.eventHandler)
         
         self.whitePlayer = UIPlayer(self.screen,self.screen,
                 'White',self.FONT,self.BASELINE_GRID,self.FONTSIZE,
                 self.WHITESTONE,self.BLACKSTONE,
                 0.2,1,False,self.TIMER_FONTSIZE,self.BUTTON_FONTSIZE,
                     self.PASS_BUTTON_COLOUR, self.PASS_BUTTON_HOVER_COLOUR,self.QUIT_BUTTON_COLOUR,self.QUIT_BUTTON_HOVER_COLOUR,
-                    self.BUTTON_FONT_COLOUR,0.8,0)
+                    self.BUTTON_FONT_COLOUR,0.8,0,self.eventHandler)
         
         self.board = UIGameBoard(self.screen,self.screen,"",self.FONT,
                                  self.BASELINE_GRID, self.FONTSIZE,
@@ -71,18 +81,8 @@ class UIMatch():
         
         self.cursor = UICursor(self.board,self.screen, self.QUIT_BUTTON_COLOUR)
 
-        self.winScreen = UIMessage(self.screen, self.screen,
-                                  "{0} won. {1} wow what a score!!!".format("Black",345),self.FONT,self.BASELINE_GRID,self.MESSAGE_FONTSIZE,
-                                  pygame.color.Color(0,0,0,60),self.WHITESTONE,
-                                  0.8,0.7,
-                                  self.BUTTON_FONTSIZE, self.BUTTON_FONT_COLOUR,
-                                  self.PASS_BUTTON_COLOUR,self.PASS_BUTTON_HOVER_COLOUR,
-                                  "New Game","Play Again?",
-                                  None, 0.1,0.15)
     
-
-    def update(self, stoneMatrix, activePlayer, blackTime,
-               whiteTime, blackPrisoners,whitePrisoners, cursorPos):
+    def update(self, stoneMatrix, activePlayer, blackTime, whiteTime, blackPrisoners,whitePrisoners, cursorPos):
         whiteTimeStr = "{} : {:02d}".format(whiteTime//60,whiteTime%60)
         self.whitePlayer.timer.update(whiteTimeStr)
         blackTimeStr = "{} : {:02d}".format(blackTime//60,blackTime%60)

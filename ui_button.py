@@ -5,25 +5,26 @@ class UIButton(UIElement):
     def __init__(self,screen,parent,
                  text, font,BASELINEGRID,fontSizeRelative, 
                  bgColour,contrastColour,hoverColour,
-                 widthDecimalPercent,heightDecimalPercent,
-                 action,left,top):
+                 widthDecimalPercent,heightDecimalPercent,left,top, eventHandler):
 
         super(UIButton, self).__init__(screen, parent,
                                      text,font,BASELINEGRID,fontSizeRelative,
                                      bgColour,contrastColour,
                                      widthDecimalPercent,heightDecimalPercent,
                                      left,top)
-        self.action = action
         self.hoverColour = hoverColour
+        self.eventHandler = eventHandler
         
-    def onHover(self):
+    def draw(self):
+        nonHoverColour = self.bgColour
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             self.bgColour = self.hoverColour
-            self.draw()
-            print("Hovering")
+        super(UIButton, self).draw()
+        self.bgColour = nonHoverColour
 
-    def onClick(self):
-        event = pygame.event.poll()
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+    def wasPressed(self):
+        if self.eventHandler.leftClicked():
             if self.rect.collidepoint(pygame.mouse.get_pos()):
-                print(self.action)
+                return True
+        else :
+            return False

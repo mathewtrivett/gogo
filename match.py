@@ -7,10 +7,10 @@ class Match:
         self.territories = Board(size)
         self.previousBoard = self.board.getMatrix()
         self.currentBoard = self.board.getMatrix()
-        self.UI = UIMatch(size)
         self.cursor = Cursor(self.board)
         self.attemptedPlace = False
         self.handler = EventHandler()
+        self.UI = UIMatch(size, self.handler)
     '''
     Evaulates one turn, the return value indictates if the match should end
     '''
@@ -109,6 +109,8 @@ class Match:
     '''
     def lookForInput(self):
         self.handler.update()
+        if self.UI.blackPlayer.quitButton.wasPressed():
+            print("a")
         if self.players[self.currentPlayer].time > 0:
             self.players[self.currentPlayer].time -= self.handler.getTimePassed()
         if self.handler.hasQuit():

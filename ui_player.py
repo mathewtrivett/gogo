@@ -11,7 +11,7 @@ class UIPlayer(UIElement):
                  widthDecimalPercent,heightDecimalPercent,
                  isActive,TIMER_FONTSIZE,BUTTON_FONTSIZE,
                     PASS_BUTTON_COLOUR, PASS_BUTTON_HOVER_COLOUR, QUIT_BUTTON_COLOUR, QUIT_BUTTON_HOVER_COLOUR,
-                    BUTTON_FONT_COLOUR,left, top):
+                    BUTTON_FONT_COLOUR,left, top, eventHandler):
 
         super(UIPlayer, self).__init__(screen, parent,
                                      text, font, BASELINEGRID, fontSizeRelative,
@@ -33,12 +33,12 @@ class UIPlayer(UIElement):
         self.quitButton = UIButton(screen,self,
                     'Quit',font,BASELINEGRID,BUTTON_FONTSIZE,
                     QUIT_BUTTON_COLOUR,BUTTON_FONT_COLOUR,QUIT_BUTTON_HOVER_COLOUR,
-                    0.5,0.06,"Quit",0.5,0)
+                    0.5,0.06,0.5,0,eventHandler)
 
         self.passButton = UIButton(screen,self,
                     'Pass',font,BASELINEGRID,BUTTON_FONTSIZE,
                     PASS_BUTTON_COLOUR,BUTTON_FONT_COLOUR,PASS_BUTTON_HOVER_COLOUR,
-                    0.5,0.06,"Pass",0,0)
+                    0.5,0.06,0,0,eventHandler)
 
     def drawActivePlayerBorder(self,padding):
         points = ((self.textX-padding*2, self.textY-padding),
