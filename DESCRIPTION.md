@@ -10,9 +10,9 @@ Go is a classic turn based strategy game for two players.  Your goal is to surro
 
 ##### Move your cursor around the board to select a point using the W,A,S,D keys to move Up,Left,Down and Right.
 
-![Left Player Place Stone Controls](/README_IMG/enter_place_stone_controls.png "Left Player Place controls")
+![Left Player Place Stone Controls](/README_IMG/space_place_stone_controls.png "Left Player Place controls")
 
-##### Press Spacebar to place your stone.
+##### Press  to place your stone.
 
 ### White Player
 
@@ -20,7 +20,7 @@ Go is a classic turn based strategy game for two players.  Your goal is to surro
 
 ##### Move your cursor around the board to select a point using the arrow keys.
 
-![Right Player Place Stone Controls](/README_IMG/space_place_stone_controls.png "Right Player Place controls")
+![Right Player Place Stone Controls](/README_IMG/enter_place_stone_controls.png "Right Player Place controls")
 
 ##### Press Enter to place your stone.
 
