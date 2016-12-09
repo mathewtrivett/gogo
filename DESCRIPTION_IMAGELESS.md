@@ -6,23 +6,15 @@ Go is a classic turn based strategy game for two players.  Your goal is to surro
 
 ### Black Player
 
-![Left Player's Move Cursor Controls](/README_IMG/wasd_cursor_controls.png "Left Player WASD move controls")
++ Move your cursor around the board to select a point using the W, A, S, D keys to move Up, Left, Down and Right.
 
-##### Move your cursor around the board to select a point using the W,A,S,D keys to move Up,Left,Down and Right.
-
-![Left Player Place Stone Controls](/README_IMG/space_place_stone_controls.png "Left Player Place controls")
-
-##### Press Space to place your stone.
++ Press Space to place your stone.
 
 ### White Player
 
-![Right Player's Move Cursor Controls](/README_IMG/arrows_move_cursor_controls.png "Right Player Player Arrows move controls")
++ Move your cursor around the board to select a point using the arrow keys to move Up, Left, Down and Right.
 
-##### Move your cursor around the board to select a point using the arrow keys to move Up,Left,Down and Right.
-
-![Right Player Place Stone Controls](/README_IMG/backspace_place_stone_controls.png "Right Player Place controls")
-
-##### Press Backspace to place your stone.
++ Press Backspace to place your stone.
 
 
 ## Placing Stones
@@ -39,7 +31,7 @@ The lines on the board are called liberties.  Think of liberties as the life lin
 
 + **Timeout**
 
-If you run out of time you can no longer play and you pass to your opponent.  Your opponent can capture all your stones or pass to end the game.
+If you run out of time, you can no longer play and you pass to your opponent.  Your opponent can capture all your stones or pass to end the game.
 
 + **Pass**
 
