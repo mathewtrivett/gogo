@@ -1,7 +1,7 @@
 class Match:
     
     def __init__(self, size=9):
-        self.players = [Player('B',10),Player('W',100)]
+        self.players = [Player('B',300),Player('W',300)]
         self.currentPlayer = 0
         self.board = Board(size)
         self.territories = Board(size)
@@ -29,6 +29,7 @@ class Match:
                            self.players[0].prisoners,self.players[1].prisoners,
                            self.cursor.coordinates)
             if self.players[self.currentPlayer].passed == True:
+                self.players[self.currentPlayer].passed = False
                 break
             if self.players[self.currentPlayer].resigned == True:
                 break
@@ -109,23 +110,42 @@ class Match:
     '''
     def lookForInput(self):
         self.handler.update()
-        if self.UI.blackPlayer.quitButton.wasPressed():
-            print("a")
         if self.players[self.currentPlayer].time > 0:
             self.players[self.currentPlayer].time -= self.handler.getTimePassed()
         if self.handler.hasQuit():
             self.UI.quit()
-        if self.handler.keyWasPressed(pygame.K_SPACE):
-            self.attemptedPlace = True
-        if self.handler.keyWasPressed(pygame.K_LEFT):
-            self.cursor.moveBy((-1,0))
-        if self.handler.keyWasPressed(pygame.K_RIGHT):
-            self.cursor.moveBy((1,0))
-        if self.handler.keyWasPressed(pygame.K_UP):
-            self.cursor.moveBy((0,-1))
-        if self.handler.keyWasPressed(pygame.K_DOWN):
-            self.cursor.moveBy((0,1))
-            
+        if self.currentPlayer == 0:
+            if self.UI.blackPlayer.quitButton.wasPressed():
+                self.players[0].resigned = True
+            if self.UI.blackPlayer.passButton.wasPressed():
+                self.players[0].passed = True
+            if self.handler.keyWasPressed(pygame.K_SPACE):
+                self.attemptedPlace = True
+            if self.handler.keyWasPressed(pygame.K_a):
+                self.cursor.moveBy((-1,0))
+            if self.handler.keyWasPressed(pygame.K_d):
+                self.cursor.moveBy((1,0))
+            if self.handler.keyWasPressed(pygame.K_w):
+                self.cursor.moveBy((0,-1))
+            if self.handler.keyWasPressed(pygame.K_s):
+                self.cursor.moveBy((0,1))
+                
+        if self.currentPlayer == 1:
+            if self.UI.whitePlayer.quitButton.wasPressed():
+                self.players[1].resigned = True
+            if self.UI.whitePlayer.passButton.wasPressed():
+                self.players[1].passed = True
+            if self.handler.keyWasPressed(pygame.K_BACKSPACE):
+                self.attemptedPlace = True
+            if self.handler.keyWasPressed(pygame.K_LEFT):
+                self.cursor.moveBy((-1,0))
+            if self.handler.keyWasPressed(pygame.K_RIGHT):
+                self.cursor.moveBy((1,0))
+            if self.handler.keyWasPressed(pygame.K_UP):
+                self.cursor.moveBy((0,-1))
+            if self.handler.keyWasPressed(pygame.K_DOWN):
+                self.cursor.moveBy((0,1))
+                
 from cursor import Cursor
 from eventHandler import EventHandler
 from board import Board
