@@ -21,12 +21,12 @@ class UIPlayer(UIElement):
         self.isActive = isActive
 
         self.timer = UIText(screen,self,
-              "3:00",font,BASELINEGRID,TIMER_FONTSIZE,
+              "5:00",font,BASELINEGRID,TIMER_FONTSIZE,
               bgColour,contrastColour,
               1,0.2,0,0)
         
         self.prisoners = UIText(screen,self,
-                    "Prisoners = 5",font, BASELINEGRID,BUTTON_FONTSIZE,
+                    "Prisoners = 0",font, BASELINEGRID,BUTTON_FONTSIZE,
                     bgColour, contrastColour,
                 1,0.05,0,0.3)
         
