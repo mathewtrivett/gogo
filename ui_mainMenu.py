@@ -1,7 +1,6 @@
 from ui_match import UIMatch
 from eventHandler import EventHandler
 from ui_message import UIMessage
-from match import Match
 import pygame
 
 class UIMainMenu(UIMatch):
@@ -57,11 +56,17 @@ class UIMainMenu(UIMatch):
             self.quit()
             self.match = Match(9)
             self.match.matchLoop()
+            self.exit = True
         elif self.thirteenByThirteen.primary_button.wasPressed():
             self.quit()
             self.match = Match(13)
             self.match.matchLoop()
+            self.exit = True
         elif self.nineteenByNineteen.primary_button.wasPressed():
             self.quit()
             self.match = Match(19)
             self.match.matchLoop()
+            self.exit = True
+
+
+from match import Match

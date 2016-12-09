@@ -83,8 +83,8 @@ class Match:
             self.lookForInput()
         self.UI.quit()
         if self.newGame == True:
-            newMatch = Match(self.board.size)
-            newMatch.matchLoop()
+            newMenu = UIMainMenu()
+            newMenu.mainLoop()
 
     '''
     Gives the current score of a player
@@ -182,3 +182,4 @@ from player import Player
 from group import Group
 import pygame
 from ui_match import UIMatch
+from ui_mainMenu import UIMainMenu
