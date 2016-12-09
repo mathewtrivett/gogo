@@ -12,6 +12,7 @@ class Match:
         self.handler = EventHandler()
         self.UI = UIMatch(size, self.handler)
         self.newGame = False
+        self.exit = False
     '''
     Evaulates one turn, the return value indictates if the match should end
     '''
@@ -22,6 +23,8 @@ class Match:
             print("No possible moves, passing...")
             self.players[self.currentPlayer].passed = True
         while(not stonePlaced):
+            if self.end == True:
+                break
             if self.players[self.currentPlayer].time <= 0:
                 self.players[self.currentPlayer].passed = True
             self.attemptedPlace = False
@@ -76,11 +79,12 @@ class Match:
             if self.players[1].resigned == True:
                 self.UI.drawEnd("White quit, black wins")
                 self.end = True
-        while self.newGame == False:
+        while self.newGame == False and self.exit == False:
             self.lookForInput()
         self.UI.quit()
-        newMatch = Match(self.board.size)
-        newMatch.matchLoop()
+        if self.newGame == True:
+            newMatch = Match(self.board.size)
+            newMatch.matchLoop()
 
     '''
     Gives the current score of a player
@@ -133,7 +137,8 @@ class Match:
         if self.players[self.currentPlayer].time > 0:
             self.players[self.currentPlayer].time -= self.handler.getTimePassed()
         if self.handler.hasQuit():
-            self.UI.quit()
+            self.end = True
+            self.exit = True
         if self.UI.winScreen.primary_button.wasPressed() and\
             self.end == True:
             self.newGame = True
