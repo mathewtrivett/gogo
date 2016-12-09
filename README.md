@@ -28,4 +28,9 @@ To play GoGo:
 
 Make sure you are inside the gogo folder, then run:
 
-`python3 gogo`
+`python3 gogo.py`
+
+
+## How to Play
+
+If you've never played Go before, take a read of the basic overview in [DESCRIPTION.md](https://github.com/mathewtrivett/gogo/blob/master/DESCRIPTION.md).
