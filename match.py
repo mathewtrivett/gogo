@@ -11,11 +11,13 @@ class Match:
         self.attemptedPlace = False
         self.handler = EventHandler()
         self.UI = UIMatch(size, self.handler)
+        self.newGame = False
     '''
     Evaulates one turn, the return value indictates if the match should end
     '''
     def playTurn(self):
-        stonePlaced = False
+        stonePlaced = False        
+        self.players[self.currentPlayer].passed = False
         if self.board.noPlayableMoves(self.players[self.currentPlayer].colour):
             print("No possible moves, passing...")
             self.players[self.currentPlayer].passed = True
@@ -29,7 +31,6 @@ class Match:
                            self.players[0].prisoners,self.players[1].prisoners,
                            self.cursor.coordinates)
             if self.players[self.currentPlayer].passed == True:
-                self.players[self.currentPlayer].passed = False
                 break
             if self.players[self.currentPlayer].resigned == True:
                 break
@@ -50,18 +51,22 @@ class Match:
                         self.players[0].time,self.players[1].time,
                            self.players[0].prisoners,self.players[1].prisoners,
                         self.cursor.coordinates)
-        end = False
+        self.end = False
         lastTurnPassed = False
-        while(not end):
+        while(not self.end):
             self.playTurn()
-            '''
-            if self.players.[currentPlayer].passed == True and\
-                self.players.[currentPlayer+1%len(self.players)].passed ==True:
-                #end game
-            if self.players.[currentPlayer].resigned == True:
-                #also end game
-            '''
+            if self.players[0].passed == True and\
+                self.players[1].passed ==True:
+                self.end = True
+            if self.players[0].resigned == True or\
+                self.players[1].resigned == True:
+                self.UI.drawEnd("Game Over")
+                self.end = True
+        while self.newGame == False:
+            self.lookForInput()
         self.UI.quit()
+        newMatch = Match(self.board.size)
+        newMatch.matchLoop()
 
     '''
     Gives the current score of a player
@@ -114,6 +119,10 @@ class Match:
             self.players[self.currentPlayer].time -= self.handler.getTimePassed()
         if self.handler.hasQuit():
             self.UI.quit()
+        if self.UI.winScreen.primary_button.wasPressed() and\
+            self.end == True:
+            self.newGame = True
+            
         if self.currentPlayer == 0:
             if self.UI.blackPlayer.quitButton.wasPressed():
                 self.players[0].resigned = True

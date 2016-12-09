@@ -8,16 +8,6 @@ from ui_player import UIPlayer
 from ui_stones import UIStones
 from ui_cursor import UICursor
 from ui_message import UIMessage
-'''
-        self.winScreen = UIMessage(self.screen, self.screen,
-                                  "{0} won. {1} wow what a score!!!".format("Black",345),self.FONT,self.BASELINE_GRID,self.MESSAGE_FONTSIZE,
-                                  pygame.color.Color(0,0,0,60),self.WHITESTONE,
-                                  0.8,0.7,
-                                  self.BUTTON_FONTSIZE, self.BUTTON_FONT_COLOUR,
-                                  self.PASS_BUTTON_COLOUR,self.PASS_BUTTON_HOVER_COLOUR,
-                                  "New Game","Play Again?",
-                                  None, 0.1,0.15)
-''' 
 
 class UIMatch():
     
@@ -79,9 +69,16 @@ class UIMatch():
                              '',self.FONT, self.BASELINE_GRID, self.FONTSIZE,
                              self.WHITESTONE, self.BLACKSTONE,1,1,self.board)
         
-        self.cursor = UICursor(self.board,self.screen, self.QUIT_BUTTON_COLOUR)
-
+        self.cursor = UICursor(self.board,self.screen, self.QUIT_BUTTON_COLOUR)        
     
+        self.winScreen = UIMessage(self.screen, self.screen,
+                            "",
+                            self.FONT,self.BASELINE_GRID,self.MESSAGE_FONTSIZE,
+                            pygame.color.Color(0,0,0,60),self.WHITESTONE,0.8,0.7,
+                            self.BUTTON_FONTSIZE, self.BUTTON_FONT_COLOUR,
+                            self.PASS_BUTTON_COLOUR,self.PASS_BUTTON_HOVER_COLOUR,
+                            "New Game",None, 0.1,0.15, self.eventHandler)
+
     def update(self, stoneMatrix, activePlayer, blackTime, whiteTime, blackPrisoners,whitePrisoners, cursorPos):
         whiteTimeStr = "{} : {:02d}".format(whiteTime//60,whiteTime%60)
         self.whitePlayer.timer.update(whiteTimeStr)
@@ -104,13 +101,16 @@ class UIMatch():
         self.blackPlayer.update()
         self.whitePlayer.update()
         self.board.update()
-        #self.winScreen.update()
         self.stones.setStones(stoneMatrix)
         self.stones.update()
         self.cursor.coordinates = cursorPos
         self.cursor.draw()
         pygame.display.update()
 
-
+    def drawEnd(self, text):
+        self.winScreen.text = text
+        self.winScreen.update()
+        pygame.display.update()
+        
     def quit(self):
         pygame.quit()

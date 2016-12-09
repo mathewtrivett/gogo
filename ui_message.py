@@ -9,8 +9,7 @@ class UIMessage(UIElement):
                  widthDecimalPercent,heightDecimalPercent,
                  BUTTON_FONTSIZE, BUTTON_FONT_COLOUR,
                  PRIMARY_BUTTON_COLOUR, PRIMARY_BUTTON_HOVER_COLOUR,
-                 PRIMARY_BUTTON_ACTION,PRIMARY_BUTTON_TEXT,
-                 secondary_button,left, top):
+                 PRIMARY_BUTTON_TEXT,secondary_button,left, top, eventHandler):
 
         super(UIMessage, self).__init__(screen, parent,
                 text, font, BASELINEGRID, fontSizeRelative,
@@ -20,8 +19,7 @@ class UIMessage(UIElement):
         self.primary_button = UIButton(screen, self,
                 PRIMARY_BUTTON_TEXT, font, BASELINEGRID, BUTTON_FONTSIZE, 
                 PRIMARY_BUTTON_COLOUR, BUTTON_FONT_COLOUR, PRIMARY_BUTTON_HOVER_COLOUR,
-                0.2, 0.12,
-                PRIMARY_BUTTON_ACTION, 0.4, 0.7)
+                0.2, 0.12, 0.4, 0.7,eventHandler)
 
         self.secondary_button = secondary_button
 
@@ -40,5 +38,3 @@ class UIMessage(UIElement):
         self.positionText(0.5,0.5)
         self.primary_button.draw()
         self.primary_button.positionText(0.5,0.5)
-        self.primary_button.onHover()
-        self.primary_button.onClick()
