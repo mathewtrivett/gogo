@@ -57,10 +57,24 @@ class Match:
             self.playTurn()
             if self.players[0].passed == True and\
                 self.players[1].passed ==True:
+                blackScore = self.findScore(self.players[0])
+                whiteScore = self.findScore(self.players[1])
+                if whiteScore == blackScore:
+                    text = "Scores tied at {}".format(whiteScore)
+                    self.UI.drawEnd(text)
+                    self.end = True
+                if whiteScore > blackScore:
+                    text = "White beats black with {} to {}.".format(whiteScore,blackScore)
+                    self.UI.drawEnd(text)
+                if whiteScore < blackScore:
+                    text = "Black beats white with {} to {}.".format(blackScore,whiteScore)
+                    self.UI.drawEnd(text)
                 self.end = True
-            if self.players[0].resigned == True or\
-                self.players[1].resigned == True:
-                self.UI.drawEnd("Game Over")
+            if self.players[0].resigned == True:
+                self.UI.drawEnd("Black quit, white wins")
+                self.end = True
+            if self.players[1].resigned == True:
+                self.UI.drawEnd("White quit, black wins")
                 self.end = True
         while self.newGame == False:
             self.lookForInput()
@@ -73,6 +87,7 @@ class Match:
     '''
     
     def findScore(self, player):
+        self.updateTerritory()
         score = player.prisoners
         for group in self.territories.groups:
             if group.colour == player.colour:
